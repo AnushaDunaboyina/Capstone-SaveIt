@@ -166,7 +166,7 @@ Response:
 }
 ```
 
-**PUT /notes/:id**
+**PATCH /notes/:id**
 
 Request:
 ```
@@ -241,6 +241,15 @@ Response:
 }
 ```
 
+**DELETE /links/:id**
+
+Response:
+```
+{
+    "message": "Note deleted successfully."
+}
+```
+
 **GET /documents**
 
 Parameters:
@@ -275,6 +284,15 @@ Response:
     "createdAt": "2023-10-02T10:00:00Z"
 }
 ```
+**DELETE /documents/:id**
+
+Response:
+```
+{
+    "message": "Note deleted successfully."
+}
+```
+
 ## Roadmap
 
 1. Create Client
@@ -291,10 +309,14 @@ Response:
     - Add placeholder endpoints with 200 responses for:
         - GET /notes
         - POST /notes
+        - PATCH /notes
+        - DELETE /notes
         - GET /links
         - POST /links
+        - DELETE /links
         - GET /documents
         - POST /documents
+        - DELETE /documents
 
 3. Create Migrations
     - Set up database migrations for:
