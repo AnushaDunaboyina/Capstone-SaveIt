@@ -331,54 +331,50 @@ Response:
     - Populate the database with sample data using seed files.
     - Ensure the data includes a variety of tags for testing filtering.
 
-6. Deploy Client and Server
-    - Deploy the client (React) and server (Express.js) projects.
-    - Ensure all commits are reflected in production.
-
-7. Feature: Fetch and Display Notes
+6. Feature: Fetch and Display Notes
     - Implement the Notes Page to fetch and display all notes.
     - Create GET /notes endpoint to retrieve notes from the database.
 
-8. Feature: Create and Upload Notes
+7. Feature: Create and Upload Notes
     - Implement a form to create and upload new notes.
     - Create POST /notes endpoint to save notes to the database.
 
-9. Feature: Fetch and Display Links
+8. Feature: Fetch and Display Links
     - Implement the Links Page to fetch and display all links.
     - Create GET /links endpoint to retrieve links from the database.
 
-10. Feature: Add New Links
+9. Feature: Add New Links
     - Implement a form to add new links.
     - Create POST /links endpoint to save links to the database.
 
-11. Feature: Fetch and Display Documents
+10. Feature: Fetch and Display Documents
     - Implement the Documents Page to fetch and display all documents.
     - Create GET /documents endpoint to retrieve documents from the database.
 
-12. Feature: Upload Documents
+11. Feature: Upload Documents
     - Implement a form to upload new documents.
     - Use multipart/form-data for file uploads.
     - Create POST /documents endpoint to save documents to the database.
 
-13. Feature: Filter by Tags
+12. Feature: Filter by Tags
     - Add tag filtering functionality to the Notes, Links, and Documents pages.
     - Update GET /notes, GET /links, and GET /documents endpoints to support the tag query parameter.
 
-14. Feature: Home Page
+13. Feature: Home Page
     - Implement the Home Page with:
         - Quick actions: "Create Note", "Add Link", "Upload Document".
         - Recent activity: Recently created/edited notes, links, and documents.
         - Organized sections: Notes, Links, Documents.
 
-15. Feature: Basic Login (Optional)
+14. Feature: Basic Login (Optional)
     - Implement a simple login system for personalization (no authentication).
     - Create POST /login endpoint.
 
-16. Bug Fixes
+15. Bug Fixes
     - Test the app thoroughly and fix any bugs.
     - Ensure all features work as expected.
 
-17. DEMO DAY
+16. DEMO DAY
 
 ---
 
