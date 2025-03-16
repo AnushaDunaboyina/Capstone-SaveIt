@@ -1,9 +1,18 @@
 // Typography
-$font-family: "Titillium web", Arial, Helvetica, sans-serif;
-$font-weight-regular: 400;
-$font-weight-semi-bold: 600;
+$font-family-primary: "Poppins", Arial, sans-serif;
+$font-family-secondary: "Roboto", Helvetica, sans-serif;
 
 // Breakpoints
 
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1280px;
+
+// Colors
+
+$black: #13182c;
+$white: #ffffff;
+$slate: #5c667e;
+$cloud: #bdc5d5;
+$graphite: #232940;
+$green: #158463;
+$red: #c94515;

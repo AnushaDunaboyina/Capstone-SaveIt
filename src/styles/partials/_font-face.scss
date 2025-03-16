@@ -1,14 +1,100 @@
 @font-face {
-    font-family: "Titillium web";
-    src: url("../../assets/fonts/TitilliumWeb-Regular.ttf");
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-Thin.ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-Italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../../assets/fonts/Poppins-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+//  Roboto
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-Thin.ttf");
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-Light.ttf");
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-Regular.ttf");
     font-weight: 400;
     font-style: normal;
   }
   
   @font-face {
-    font-family: "Titillium web";
-    src: url("../../assets/fonts/TitilliumWeb-SemiBold.ttf");
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-Italic.ttf");
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-Medium.ttf");
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-SemiBold.ttf");
     font-weight: 600;
     font-style: normal;
   }
   
+  @font-face {
+    font-family: "Roboto";
+    src: url("../../assets/fonts/Roboto-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+  }
