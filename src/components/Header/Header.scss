@@ -1,4 +1,10 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 .header {
+    background-color: $blue-light;
+    padding: 16px;
+    
   &__list {
     list-style: none;
     display: flex;
@@ -8,12 +14,16 @@
   &__nav {
     display: flex;
     justify-content: space-around;
-    gap: 14px;
+    gap: 12px;
   }
 
   &__button {
-    background-color: none;
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    font-family: $font-family-primary;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $navy;
   }
 }

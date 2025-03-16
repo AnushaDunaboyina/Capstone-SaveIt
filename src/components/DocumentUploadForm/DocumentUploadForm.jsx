@@ -36,10 +36,6 @@ export default function DocumentUploadForm() {
     setError(null); // Clear any previous error message before starting a new upload attempt.
     setSuccess(false); // Clear previous success messages
 
-    // console.log("File:", file);
-    // console.log("Filename:", filename);
-    // console.log("Tags:", tags);
-
     // Prepare Form Data
     const formData = new FormData();
     formData.append("file", file);
