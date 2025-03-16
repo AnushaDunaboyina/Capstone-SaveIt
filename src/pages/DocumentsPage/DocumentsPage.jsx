@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import DocumentUploadForm from "../../components/DocumentUploadForm/DocumentUploadForm";
 
 const DocumentsPage = () => {
   return (
-    <div>DocumentsPage</div>
+    <>
+    <DocumentUploadForm/>
+    </>
+    
   )
 }
 
