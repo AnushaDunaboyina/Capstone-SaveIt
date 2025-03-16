@@ -4,7 +4,7 @@ import { API_URL } from "../../config"; // API_URL is the base URL
 
 console.log("API_URL in DocumentUploadForm:", API_URL);
 
-export default function DocumentUploadForm() {
+export default function DocumentUploadForm({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState("");
   const [tags, setTags] = useState("");
@@ -15,26 +15,26 @@ export default function DocumentUploadForm() {
 
   // Event handler to update the "file" state when a user selects a file
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]); // gets the selected file and stores it in 'file'
-    setSuccess(false); // Clear any previous success message
+    setFile(e.target.files[0]);
+    setSuccess(false);
   };
 
   const handleFilenameChange = (e) => {
     setFilename(e.target.value);
-    setSuccess(false); // Clear any previous success message
+    setSuccess(false);
   };
 
   const handleTagsChange = (e) => {
     setTags(e.target.value);
-    setSuccess(false); // Clear any previous success message
+    setSuccess(false);
   };
 
   // Function to handle form submission and file upload
   const handleUpload = async (e) => {
-    e.preventDefault(); // Prevent default form submission behaviour
-    setLoading(true); // Indicate that an upload is in progress
-    setError(null); // Clear any previous error message before starting a new upload attempt.
-    setSuccess(false); // Clear previous success messages
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
 
     // Prepare Form Data
     const formData = new FormData();
@@ -53,20 +53,19 @@ export default function DocumentUploadForm() {
         }
       );
 
-      // Show success message
-      setSuccess(true);
       console.log("File uploaded successfully:", response.data);
+
+      setSuccess(true);
+      setError(null);
+
+      if (typeof onUploadSuccess === "function") {
+        onUploadSuccess();
+      }
     } catch (error) {
       console.error("Error uploading file:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setError(error.response.data.message);
-      } else {
-        setError("Failed to upload the document. Please try again.");
-      }
+
+      setError("Failed to upload the document. Please try again.");
+      setSuccess(false);
     } finally {
       setLoading(false);
     }

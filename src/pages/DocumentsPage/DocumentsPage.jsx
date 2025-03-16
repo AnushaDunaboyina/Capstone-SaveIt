@@ -1,15 +1,12 @@
-import React from 'react';
-import DocumentUploadForm from "../../components/DocumentUploadForm/DocumentUploadForm";
-import DocumentList from '../../components/DocumentsList/DocumentsList';
+import React from "react";
+import DocumentList from "../../components/DocumentsList/DocumentsList";
 
 const DocumentsPage = () => {
   return (
     <>
-    <DocumentUploadForm />
-    <DocumentList />
+      <DocumentList />
     </>
-    
-  )
-}
+  );
+};
 
 export default DocumentsPage;

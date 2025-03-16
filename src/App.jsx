@@ -7,15 +7,12 @@ import NotesPage from "./pages/NotesPage/NotesPage";
 import LinksPage from "./pages/LinksPage/LinksPage";
 import DocumentsPage from "./pages/DocumentsPage/DocumentsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import DocumentUploadForm from "./components/DocumentUploadForm/DocumentUploadForm";
 import DocumentEdit from "./components/DocumentEdit/DocumentEdit";
 import DocumentDetails from "./components/DocumentDetails/DocumentDetails";
 
 import { API_URL } from "./config";
 
 console.log("API_URL in App:", API_URL);
-
-
 
 function App() {
   return (
@@ -26,9 +23,8 @@ function App() {
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/links" element={<LinksPage />} />
         <Route path="/documents" element={<DocumentsPage />} />
-        <Route path="/documents/upload" element={<DocumentUploadForm />} />
-        <Route path="/documents/:id" element={<DocumentDetails />}/>
-        <Route path="/documents/:id/edit" element={<DocumentEdit />}/>
+        <Route path="/documents/:id" element={<DocumentDetails />} />
+        <Route path="/documents/:id/edit" element={<DocumentEdit />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {/* <Footer /> */}
