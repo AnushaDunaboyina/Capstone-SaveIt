@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import { API_URL } from "../../config";
 
-const DocumentEdit = () => {
-  return (
-    <div>DocumentEdit</div>
-  )
+export default function DocumentEdit () {
+  const [filename, setFilename] = useState(document?.filename || "");
 }
-
-export default DocumentEdit

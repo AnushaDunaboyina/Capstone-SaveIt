@@ -36,6 +36,20 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
     setError(null);
     setSuccess(false);
 
+    // Check for missing fields before proceeding
+    if (!file || !filename || !tags) {
+      setError("Please fill out all fields before uploading.");
+      console.error("File, filename, or tags are missing!");
+      setLoading(false);
+      return;
+    }
+
+    // Debug: Log the current input values
+    console.log("Preparing to upload:");
+    console.log("File:", file);
+    console.log("Filename:", filename);
+    console.log("Tags:", tags);
+
     // Prepare Form Data
     const formData = new FormData();
     formData.append("file", file);

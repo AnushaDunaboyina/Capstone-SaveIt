@@ -10,12 +10,12 @@ export default function DocumentList() {
   const [viewAll, setViewAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingDocument, setEditingDocument] = useState(null);
 
   // Function to fetch documents
   const fetchDocuments = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/documents`);
-
       setDocuments(response.data);
       setSearchResults(response.data);
     } catch (err) {
@@ -28,12 +28,23 @@ export default function DocumentList() {
   // Fetch documents when the component is mounted
   useEffect(() => {
     fetchDocuments();
-    console.log("Initial documents:", documents);
   }, []);
+
+  // Handle Edit document
+  const handleEditDocument = (document) => {
+    setEditingDocument(document); // Open the DocumentEdit componet for the selected document
+  };
+
+  // Handle Cancel Edit document
+  const handleCancelEditDocument = () => {
+    setEditingDocument(null);
+  };
+
+  // Handle Save Edit document
+  // const handleSaveEdit
 
   // Handle Search Query
   const handleSearch = (query) => {
-    console.log("Search query:", query);
     if (query.trim() === "") {
       setSearchResults(documents); // Reset to all documents if the query is empty
     } else {
@@ -51,10 +62,30 @@ export default function DocumentList() {
 
         return filenameMatches || tagsMatches;
       });
-      console.log("Filtered results:", filtered);
+
       setSearchResults(filtered); // Update the search results
     }
   };
+
+  // Replace the local filtering logic in handleSearch with an API call to the /search endpoint.
+  // const handleSearch = async (query) => {
+  //   console.log("Search query:", query);
+
+  //   if (query.trim() === "") {
+  //     setSearchResults(documents); // Reset to all documents if the query is empty
+  //   } else {
+  //     try {
+  //       const response = await axios.get(`${API_URL}/api/documents/search`, {
+  //         params: { query },
+  //       });
+  //       console.log("Filtered results from backend:", response.data);
+  //       setSearchResults(response.data); // Use backend response for search results
+  //     } catch (err) {
+  //       console.error("Error fetching search results:", err);
+  //       setSearchResults([]); // Clear results if there's an error
+  //     }
+  //   }
+  // };
 
   if (loading) {
     return <p>Loading documents...</p>;
@@ -104,11 +135,6 @@ export default function DocumentList() {
             displayDocuments.map((document) => (
               <li key={document.id}>
                 <p>Filename: {document.filename}</p>
-                <p>
-                  {typeof document.tags === "string"
-                    ? document.tags.split(",").join(", ")
-                    : document.tags}
-                </p>
                 <a
                   href={`http://localhost:5050${document.filepath}`}
                   target="_blank"
