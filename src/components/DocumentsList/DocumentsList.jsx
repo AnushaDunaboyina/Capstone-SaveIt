@@ -4,6 +4,7 @@ import { API_URL } from "../../config";
 import DocumentUploadForm from "../DocumentUploadForm/DocumentUploadForm"; // Import the upload form component
 import SearchBar from "../SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 export default function DocumentList() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ export default function DocumentList() {
   const [viewAll, setViewAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [deleteDocument, setDeleteDocument] = useState(null);
 
   // Function to fetch documents
   const fetchDocuments = async () => {
@@ -36,17 +39,6 @@ export default function DocumentList() {
   const handleEditDocument = (document) => {
     navigate(`/documents/${document.id}/edit`); // Open the DocumentEdit componet for the selected document
   };
-
-  // // Handle Cancel Edit document
-  // const handleCancelEditDocument = () => {
-  //   setEditingDocument(null);
-  // };
-
-  // // Handle Save Edit document
-  // const handleSaveEdit = () => {
-  //   fetchDocuments(); // Refresh documents after editing
-  //   setEditingDocument(null);
-  // };
 
   // Handle Search Query
   const handleSearch = (query) => {
@@ -91,6 +83,27 @@ export default function DocumentList() {
   //     }
   //   }
   // };
+
+  // Function to Delete Document
+  const handleDeleteClick = (document) => {
+    setDeleteDocument(document); // Stor the document to be deleted
+    setShowModal(true); // Show the modal
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `${API_URL}/api/documents/${deleteDocument.id}`
+      );
+      alert("Document deleted successfully!");
+      setShowModal(false); // Close the modal
+      fetchDocuments(); // refresh the list
+      console.log(response.data);
+    } catch (err) {
+      console.error("Error deleting document:", err);
+      alert("Failed to delete the document.");
+    }
+  };
 
   if (loading) {
     return <p>Loading documents...</p>;
@@ -153,12 +166,22 @@ export default function DocumentList() {
                 <button onClick={() => handleEditDocument(document)}>
                   Edit
                 </button>
+
+                <button onClick={() => handleDeleteClick(document)}>
+                  Delete
+                </button>
               </li>
             ))
           ) : (
             <p>No documents found.</p>
           )}
         </ul>
+        <DeleteModal
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          onConfirm={handleConfirmDelete}
+          itemName={deleteDocument?.filename}
+        />
       </div>
     </>
   );
