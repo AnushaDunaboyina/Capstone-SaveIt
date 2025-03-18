@@ -3,14 +3,16 @@ import React, { useState, useEffect } from "react";
 import { API_URL } from "../../config";
 import DocumentUploadForm from "../DocumentUploadForm/DocumentUploadForm"; // Import the upload form component
 import SearchBar from "../SearchBar/SearchBar";
+import { useNavigate } from "react-router-dom";
 
 export default function DocumentList() {
+  const navigate = useNavigate();
+
   const [documents, setDocuments] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [viewAll, setViewAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [editingDocument, setEditingDocument] = useState(null);
 
   // Function to fetch documents
   const fetchDocuments = async () => {
@@ -32,16 +34,19 @@ export default function DocumentList() {
 
   // Handle Edit document
   const handleEditDocument = (document) => {
-    setEditingDocument(document); // Open the DocumentEdit componet for the selected document
+    navigate(`/documents/${document.id}/edit`); // Open the DocumentEdit componet for the selected document
   };
 
-  // Handle Cancel Edit document
-  const handleCancelEditDocument = () => {
-    setEditingDocument(null);
-  };
+  // // Handle Cancel Edit document
+  // const handleCancelEditDocument = () => {
+  //   setEditingDocument(null);
+  // };
 
-  // Handle Save Edit document
-  // const handleSaveEdit
+  // // Handle Save Edit document
+  // const handleSaveEdit = () => {
+  //   fetchDocuments(); // Refresh documents after editing
+  //   setEditingDocument(null);
+  // };
 
   // Handle Search Query
   const handleSearch = (query) => {
@@ -94,11 +99,6 @@ export default function DocumentList() {
     return <p className="error">{error}</p>;
   }
 
-  // // Sort documents by createdAt (newest first)
-  // const sortedDocuments = [...documents].sort(
-  //   (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  // );
-
   // Sort and limit searchResults
   const displayDocuments = viewAll
     ? [...searchResults].sort(
@@ -118,7 +118,6 @@ export default function DocumentList() {
       </div>
       <div>
         <h2>Upload a Document</h2>
-        {/* Pass the refresh function as a prop to DocumentUploadForm */}
         <DocumentUploadForm onUploadSuccess={fetchDocuments} />
       </div>
       <div>
@@ -135,13 +134,25 @@ export default function DocumentList() {
             displayDocuments.map((document) => (
               <li key={document.id}>
                 <p>Filename: {document.filename}</p>
+                <p>
+                  Tags:{" "}
+                  {Array.isArray(document.tags)
+                    ? document.tags.join(", ") // For arrays
+                    : typeof document.tags === "string" &&
+                      document.tags.startsWith("[")
+                    ? JSON.parse(document.tags).join(", ") // Parse JSON strings
+                    : "No tags"}
+                </p>
                 <a
                   href={`http://localhost:5050${document.filepath}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Preview Document
+                  Preview
                 </a>
+                <button onClick={() => handleEditDocument(document)}>
+                  Edit
+                </button>
               </li>
             ))
           ) : (
