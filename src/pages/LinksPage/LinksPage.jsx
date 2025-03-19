@@ -63,6 +63,7 @@ const LinksPage = () => {
 
   return (
     <div className="links-page">
+      <h2>LINKS</h2>
       <div>
         <SearchBar onSearch={setSearchQuery} placeholder="Search links..." />
       </div>
