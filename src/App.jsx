@@ -25,8 +25,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/links" element={<LinksPage />} />
-        <Route path="/links/add" element={<LinkAddForm />}/>
-        <Route path="/links/:id" element={<LinkDetails/> }/>
+        <Route path="/links/add" element={<LinkAddForm />} />
+        <Route path="/links/:id" element={<LinkDetails />} />
         <Route path="/links/:id/edit" element={<LinkEdit />} />
         <Route path="/documents" element={<DocumentsPage />} />
         <Route path="/documents/:id" element={<DocumentDetails />} />

@@ -112,6 +112,7 @@ export default function DocumentList() {
   const displayDocuments = viewAll
     ? sortedDocuments
     : sortedDocuments.slice(0, 3);
+    
 
   return (
     <>
@@ -121,31 +122,32 @@ export default function DocumentList() {
           placeholder="Search by filename or tags..."
         />
       </div>
-      <div className="sorting-controls">
-        <label htmlFor="sortBy">Sort by:</label>
-        <select
-          id="sortBy"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
-          <option value="createdAt">Date</option>
-          <option value="filename">Filename</option>
-        </select>
 
-        <select
-          id="sortOrder"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
-        </select>
-      </div>
       <div>
         <h2>Upload a Document</h2>
         <DocumentUploadForm onUploadSuccess={fetchDocuments} />
       </div>
       <div>
+        <div className="sorting-controls">
+          <label htmlFor="sortBy">Sort by:</label>
+          <select
+            id="sortBy"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="createdAt">Date</option>
+            <option value="filename">Filename</option>
+          </select>
+
+          <select
+            id="sortOrder"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+        </div>
         <h2>Documents</h2>
         <div>
           {!viewAll ? (

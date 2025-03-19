@@ -8,9 +8,11 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState("");
   const [tags, setTags] = useState("");
-  const [loading, setLoading] = useState(false); // A flsg to shoe loading state while the file is loading
-  const [error, setError] = useState(null); // Stores any error message if the upload fails
-  const [success, setSuccess] = useState(false); // Tracks upload success
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(null); 
+  const [success, setSuccess] = useState(false); 
+
+
   // Handling user input
 
   // Event handler to update the "file" state when a user selects a file
@@ -78,6 +80,8 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
       setLoading(false);
     }
   };
+
+ 
 
   return (
     <form onSubmit={handleUpload}>

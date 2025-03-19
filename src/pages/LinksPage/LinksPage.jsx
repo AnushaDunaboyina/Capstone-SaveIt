@@ -63,10 +63,14 @@ const LinksPage = () => {
 
   return (
     <div className="links-page">
-      <SearchBar onSearch={setSearchQuery} placeholder="Search links..." />
-      <button onClick={() => navigate("/links/add")} className="add-button">
-        Add Link
-      </button>
+      <div>
+        <SearchBar onSearch={setSearchQuery} placeholder="Search links..." />
+      </div>
+      <div>
+        <button onClick={() => navigate("/links/add")} className="add-button">
+          Add Link
+        </button>
+      </div>
 
       <div className="sorting-controls">
         <label htmlFor="sortBy">Sort by:</label>
@@ -89,6 +93,14 @@ const LinksPage = () => {
           <option value="asc">Ascending</option>
         </select>
       </div>
+      <div>
+        {!viewAll ? (
+          <button onClick={() => setViewAll(true)}>View All</button>
+        ) : (
+          <button onClick={() => setViewAll(false)}>Show Less</button>
+        )}
+      </div>
+      <div></div>
       <LinkList
         links={displayedLinks}
         onEdit={(id) => navigate(`/links/${id}/edit`)}
@@ -98,11 +110,6 @@ const LinksPage = () => {
         }}
       />
 
-      {!viewAll ? (
-        <button onClick={() => setViewAll(true)}>View All</button>
-      ) : (
-        <button onClick={() => setViewAll(false)}>Show Less</button>
-      )}
       {showDeleteModal && (
         <DeleteModal
           show={showDeleteModal}
