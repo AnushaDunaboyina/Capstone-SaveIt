@@ -4,7 +4,7 @@ SaveIt
 
 ## Overview
 
-SaveIt is a app designed to help users organize their digital life managing notes, saving important links, and storing documents (PDFs, Word files) in one centralized platform.
+SaveIt is a app designed to help users organize their digital life by managing notes, saving important links, and storing documents (PDFs, Word files) in one centralized platform.
 
 ### Problem Space
 
