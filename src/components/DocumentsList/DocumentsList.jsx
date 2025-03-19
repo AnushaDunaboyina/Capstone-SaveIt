@@ -5,6 +5,7 @@ import DocumentUploadForm from "../DocumentUploadForm/DocumentUploadForm"; // Im
 import SearchBar from "../SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import "./DocumentsList.scss";
 
 export default function DocumentList() {
   const navigate = useNavigate();
@@ -139,7 +140,7 @@ export default function DocumentList() {
           {!viewAll ? (
             <button onClick={() => setViewAll(true)}>View All</button>
           ) : (
-            <button onClick={() => setViewAll(false)}>Show Less</button>
+            <button onClick={() => setViewAll(false)}>View Sorted</button>
           )}
         </div>
         <ul>
@@ -147,7 +148,7 @@ export default function DocumentList() {
             displayDocuments.map((document) => (
               <li key={document.id}>
                 <p>Filename: {document.filename}</p>
-                <p>
+                {/* <p>
                   Tags:{" "}
                   {Array.isArray(document.tags)
                     ? document.tags.join(", ") // For arrays
@@ -155,7 +156,29 @@ export default function DocumentList() {
                       document.tags.startsWith("[")
                     ? JSON.parse(document.tags).join(", ") // Parse JSON strings
                     : "No tags"}
-                </p>
+                </p> */}
+
+                {document.tags && document.tags.length > 0 && (
+                  <div className="document-tags">
+                    <p>Tags:</p>
+                    <ul>
+                      {Array.isArray(document.tags)
+                        ? document.tags.map((tag, index) => (
+                            <li key={index} className="document-tag">
+                              {tag}
+                            </li>
+                          ))
+                        : typeof document.tags === "string" &&
+                          document.tags.startsWith("[")
+                        ? JSON.parse(document.tags).map((tag, index) => (
+                            <li key={index} className="document-tag">
+                              {tag}
+                            </li>
+                          ))
+                        : "No tags"}
+                    </ul>
+                  </div>
+                )}
                 <a
                   href={`http://localhost:5050${document.filepath}`}
                   target="_blank"

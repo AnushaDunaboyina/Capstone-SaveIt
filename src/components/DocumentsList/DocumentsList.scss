@@ -1,0 +1,23 @@
+.document-tags,
+.link-tags {
+  margin-top: 8px;
+}
+
+.document-tags ul,
+.link-tags ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Use flexbox to display tags inline */
+  gap: 8px; /* Add spacing between tags */
+}
+
+.document-tag,
+.link-tag {
+  background-color: #eef;
+  color: #334;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-block; /* Ensure each tag stays inline */
+}
