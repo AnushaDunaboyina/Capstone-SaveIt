@@ -1,7 +1,7 @@
 import React from "react";
 import LinkDetails from "../LinkDetails/LinkDetails";
 
-const LinkList = ({ links, onEdit, onDelete }) => {
+export default function LinkList({ links, onEdit, onDelete }) {
   return (
     <div className="link-list">
       {links.map((link) => (
@@ -15,6 +15,4 @@ const LinkList = ({ links, onEdit, onDelete }) => {
       ))}
     </div>
   );
-};
-
-export default LinkList;
+}

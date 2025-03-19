@@ -1,10 +1,11 @@
 import React from "react";
 import "./LinkDetails.scss";
 
-const LinkDetails = ({ link, showActions, onEdit, onDelete }) => {
+export default function LinkDetails ({ link, showActions, onEdit, onDelete }) {
   return (
     <div className="link-details">
       <h3>{link.title}</h3>
+      <p>Created on: {link.displayDate}</p>
       <p>{link.description}</p>
       <a href={link.url} target="_blank" rel="noopener noreferrer">
         {link.url}
@@ -33,4 +34,4 @@ const LinkDetails = ({ link, showActions, onEdit, onDelete }) => {
   );
 };
 
-export default LinkDetails;
+

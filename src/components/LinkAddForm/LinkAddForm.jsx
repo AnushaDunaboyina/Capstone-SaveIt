@@ -8,6 +8,7 @@ export default function LinkAddForm() {
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [protocol, setProtocol] = useState("https://");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
@@ -30,19 +31,20 @@ export default function LinkAddForm() {
       setLoading(true);
       setError(null);
 
+      // Check if the user input URL already includes a protocol
+      const fullUrl =
+        url.trim().startsWith("http://") || url.trim().startsWith("https://")
+          ? url.trim() // Use the user-provided URL as is
+          : `${protocol}${url.trim()}`; // Otherwise, prepend the selected protocol
+      console.log("Final URL being sent:", fullUrl); // Debug log
+
       // Split and trim tags
       const updatedTags = tags.split(",").map((tag) => tag.trim());
-      console.log("Payload being sent to server:", {
-        title: title.trim(),
-        url: url.trim(),
-        description: description.trim(),
-        thumbnail: thumbnail.trim(),
-        tags: updatedTags,
-      });
+    
 
       const response = await axios.post(`${API_URL}/api/links`, {
         title: title.trim(),
-        url: url.trim(),
+        url: fullUrl,
         description: description.trim(),
         thumbnail: thumbnail.trim(),
         tags: updatedTags, // Send as an array
@@ -82,9 +84,21 @@ export default function LinkAddForm() {
       </div>
 
       <div>
+        <label>Protocol:</label>
+        <select
+          value={protocol}
+          onChange={(e) => setProtocol(e.target.value)} // Update protocol state
+        >
+          <option value="http://">http://</option>
+          <option value="https://">https://</option>
+        </select>
+      </div>
+
+      <div>
         <label>URL:</label>
         <input
           type="text"
+          placeholder="Enter the URL (e.g., example.com) OR (e.g., https://www.example.com/)"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           required

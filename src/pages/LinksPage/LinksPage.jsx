@@ -6,7 +6,7 @@ import LinkList from "../../components/LinksList/LinksList";
 import { API_URL } from "../../config";
 import axios from "axios";
 
-const LinksPage = () => {
+export default function LinksPage() {
   const [links, setLinks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [viewAll, setViewAll] = useState(false);
@@ -45,18 +45,16 @@ const LinksPage = () => {
 
   // Sorting the links
   const sortedLinks = [...links].sort((a, b) => {
-    // Determine sort order
-    let comparison = 0;
     if (sortBy === "createdAt") {
       const dateA = new Date(a.createdAt);
       const dateB = new Date(b.createdAt);
-      comparison = dateB - dateA; // Sorting in descending order initially
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
     } else if (sortBy === "title") {
-      comparison = a.title.localeCompare(b.title);
+      return sortOrder === "asc"
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
     }
-
-    // Apply sort order (ascending or descending)
-    return sortOrder === "asc" ? comparison : -comparison;
+    return 0;
   });
 
   const displayedLinks = viewAll ? sortedLinks : sortedLinks.slice(0, 3);
@@ -121,6 +119,4 @@ const LinksPage = () => {
       )}
     </div>
   );
-};
-
-export default LinksPage;
+}
