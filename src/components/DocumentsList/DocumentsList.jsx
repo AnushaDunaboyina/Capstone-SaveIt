@@ -17,6 +17,7 @@ export default function DocumentList() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [deleteDocument, setDeleteDocument] = useState(null);
+ 
 
   // Function to fetch documents
   const fetchDocuments = async () => {
