@@ -17,7 +17,8 @@ export default function DocumentList() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [deleteDocument, setDeleteDocument] = useState(null);
- 
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   // Function to fetch documents
   const fetchDocuments = async () => {
@@ -39,7 +40,7 @@ export default function DocumentList() {
 
   // Handle Edit document
   const handleEditDocument = (document) => {
-    navigate(`/documents/${document.id}/edit`); // Open the DocumentEdit componet for the selected document
+    navigate(`/documents/${document.id}/edit`);
   };
 
   // Handle Search Query
@@ -52,7 +53,6 @@ export default function DocumentList() {
           .toLowerCase()
           .includes(query.toLowerCase());
 
-        // Safely handle tags, treating undefined/null cases as an empty string
         const tags =
           typeof doc.tags === "string"
             ? doc.tags
@@ -65,26 +65,6 @@ export default function DocumentList() {
       setSearchResults(filtered); // Update the search results
     }
   };
-
-  // Replace the local filtering logic in handleSearch with an API call to the /search endpoint.
-  // const handleSearch = async (query) => {
-  //   console.log("Search query:", query);
-
-  //   if (query.trim() === "") {
-  //     setSearchResults(documents); // Reset to all documents if the query is empty
-  //   } else {
-  //     try {
-  //       const response = await axios.get(`${API_URL}/api/documents/search`, {
-  //         params: { query },
-  //       });
-  //       console.log("Filtered results from backend:", response.data);
-  //       setSearchResults(response.data); // Use backend response for search results
-  //     } catch (err) {
-  //       console.error("Error fetching search results:", err);
-  //       setSearchResults([]); // Clear results if there's an error
-  //     }
-  //   }
-  // };
 
   // Function to Delete Document
   const handleDeleteClick = (document) => {
@@ -114,14 +94,24 @@ export default function DocumentList() {
     return <p className="error">{error}</p>;
   }
 
-  // Sort and limit searchResults
+  // Sorting the documents
+  const sortedDocuments = [...searchResults].sort((a, b) => {
+    let comparison = 0;
+    if (sortBy === "createdAt") {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      comparison = dateB - dateA; // Sorting in descending order initially
+    } else if (sortBy === "filename") {
+      comparison = a.filename.localeCompare(b.filename);
+    }
+
+    // Apply sort order (ascending or descending)
+    return sortOrder === "asc" ? comparison : -comparison;
+  });
+
   const displayDocuments = viewAll
-    ? [...searchResults].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      ) // Sort searchResults
-    : [...searchResults]
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 3); // Show top 3
+    ? sortedDocuments
+    : sortedDocuments.slice(0, 3);
 
   return (
     <>
@@ -130,6 +120,26 @@ export default function DocumentList() {
           onSearch={handleSearch}
           placeholder="Search by filename or tags..."
         />
+      </div>
+      <div className="sorting-controls">
+        <label htmlFor="sortBy">Sort by:</label>
+        <select
+          id="sortBy"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="createdAt">Date</option>
+          <option value="filename">Filename</option>
+        </select>
+
+        <select
+          id="sortOrder"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
       </div>
       <div>
         <h2>Upload a Document</h2>
@@ -149,15 +159,6 @@ export default function DocumentList() {
             displayDocuments.map((document) => (
               <li key={document.id}>
                 <p>Filename: {document.filename}</p>
-                {/* <p>
-                  Tags:{" "}
-                  {Array.isArray(document.tags)
-                    ? document.tags.join(", ") // For arrays
-                    : typeof document.tags === "string" &&
-                      document.tags.startsWith("[")
-                    ? JSON.parse(document.tags).join(", ") // Parse JSON strings
-                    : "No tags"}
-                </p> */}
 
                 {document.tags && document.tags.length > 0 && (
                   <div className="document-tags">
