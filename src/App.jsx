@@ -5,6 +5,9 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import NotesPage from "./pages/NotesPage/NotesPage";
 import LinksPage from "./pages/LinksPage/LinksPage";
+import LinkAddForm from "./components/LinkAddForm/LinkAddForm";
+import LinkDetails from "./components/LinkDetails/LinkDetails";
+import LinkEdit from "./components/LinkEdit/LinkEdit";
 import DocumentsPage from "./pages/DocumentsPage/DocumentsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import DocumentEdit from "./components/DocumentEdit/DocumentEdit";
@@ -22,6 +25,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/links" element={<LinksPage />} />
+        <Route path="/links/add" element={<LinkAddForm />}/>
+        <Route path="/links/:id" element={<LinkDetails/> }/>
+        <Route path="/links/:id/edit" element={<LinkEdit />} />
         <Route path="/documents" element={<DocumentsPage />} />
         <Route path="/documents/:id" element={<DocumentDetails />} />
         <Route path="/documents/:id/edit" element={<DocumentEdit />} />

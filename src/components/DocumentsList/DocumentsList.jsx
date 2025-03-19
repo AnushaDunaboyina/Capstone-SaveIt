@@ -139,7 +139,7 @@ export default function DocumentList() {
           {!viewAll ? (
             <button onClick={() => setViewAll(true)}>View All</button>
           ) : (
-            <button onClick={() => setViewAll(false)}>View Sorted</button>
+            <button onClick={() => setViewAll(false)}>Show Less</button>
           )}
         </div>
         <ul>
