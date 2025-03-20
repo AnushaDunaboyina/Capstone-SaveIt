@@ -97,6 +97,12 @@ export default function NoteEdit() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          style={{
+            backgroundColor: color, 
+            color: "#333", 
+            padding: "8px",
+            borderRadius: "4px",
+          }}
         />
       </div>
 
@@ -108,6 +114,12 @@ export default function NoteEdit() {
           rows="10"
           cols="50"
           required
+          style={{
+            backgroundColor: color, 
+            color: "#333", 
+            padding: "8px",
+            borderRadius: "4px",
+          }}
         />
       </div>
 

@@ -14,6 +14,7 @@ export default function NotesPage() {
   const [deleteNote, setDeleteNote] = useState(null);
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState("desc");
+  const [selectedNote, setSelectedNote] = useState(null);
 
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ export default function NotesPage() {
         const response = await axios.get(`${API_URL}/api/notes`, {
           params: { search: searchQuery },
         });
-        console.log("Filtered Notes:", response.data);
+        // console.log("Filtered Notes:", response.data);
         setNotes(response.data);
       } catch (error) {
         console.error("Failed to fetch notes:", error);
@@ -106,6 +107,11 @@ export default function NotesPage() {
         onDelete={(note) => {
           setDeleteNote(note);
           setShowDeleteModal(true);
+        }}
+        onView={(note) => {
+          {
+            note.title;
+          }
         }}
       />
 

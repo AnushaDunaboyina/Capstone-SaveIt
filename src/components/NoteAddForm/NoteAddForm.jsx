@@ -50,14 +50,14 @@ export default function NoteAddForm() {
   // Accept the AI suggestion
   const handleAcceptSuggestion = () => {
     setShowSuggestion(false); // Hide the Accept/Discard buttons
-    // alert("Suggestion accepted and applied to the content.");
+    
   };
 
   // Discard the AI suggestion and revert to the original content
   const handleDiscardSuggestion = () => {
     setContent(originalContent); // Revert to the original content
     setShowSuggestion(false); // Hide the Accept/Discard buttons
-    // alert("Suggestion discarded. Reverted to original content.");
+    
   };
 
   // Handle content changes and apply bullet points if enabled
@@ -113,7 +113,7 @@ export default function NoteAddForm() {
 
       {/* Color Picker and Bullet Mode Toggle */}
       <div>
-        <label>Note Color:</label>
+        {/* <label>Note Color:</label> */}
         <input
           type="color"
           value={color}
@@ -127,21 +127,28 @@ export default function NoteAddForm() {
           {bulletMode ? "Disable Bullet Points" : "Enable Bullet Points"}
         </button>
       </div>
+      
 
       {/* Title Field */}
       <div>
-        <label>Title:</label>
+        {/* <label>Title:</label> */}
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          style={{
+            backgroundColor: color, 
+            color: "#333", 
+            padding: "8px",
+            borderRadius: "4px",
+          }}
         />
       </div>
 
       {/* Content Field */}
       <div>
-        <label>Content:</label>
+        {/* <label>Content:</label> */}
         <textarea
           value={content}
           onChange={handleContentChange}
@@ -150,6 +157,12 @@ export default function NoteAddForm() {
           rows="10"
           cols="50"
           required
+          style={{
+            backgroundColor: color, 
+            color: "#333", 
+            padding: "8px",
+            borderRadius: "4px",
+          }}
         />
       </div>
 

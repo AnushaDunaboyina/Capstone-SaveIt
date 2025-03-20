@@ -1,7 +1,7 @@
 import React from "react";
 import NoteDetails from "../NoteDetails/NoteDetails"; // Component for individual notes
 
-export default function NotesList({ notes, onEdit, onDelete }) {
+export default function NotesList({ notes, onEdit, onDelete, onView }) {
   return (
     <div className="note-list">
       {notes.map((note) => (
@@ -11,6 +11,7 @@ export default function NotesList({ notes, onEdit, onDelete }) {
           showActions={true}
           onEdit={() => onEdit(note.id)}
           onDelete={() => onDelete(note)}
+          onView={() => onView(note)} // Pass view action
         />
       ))}
     </div>
