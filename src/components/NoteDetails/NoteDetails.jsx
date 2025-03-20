@@ -25,27 +25,15 @@ export default function NoteDetails({
       style={{ backgroundColor: note.color }}
       onClick={toggleView}
     >
-      {" "}
-      {/* Apply note color */}
+     
+      
       <h3>{note.title}</h3>
-      <p>Created on: {note.displayDate}</p>
+      <p> {note.displayDate}</p>
       <p>{isExpanded ? note.content : `${note.content.slice(0, 10)}...`}</p>
-      {/* <p>
-        {note.content.split("\n").map(
-          (
-            line,
-            index // Handle bullet points
-          ) => (
-            <span key={index}>
-              {line}
-              <br />
-            </span>
-          )
-        )}
-      </p> */}
+      
       {note.tags && note.tags.length > 0 && (
         <div className="note-tags">
-          <p>Tags:</p>
+          
           <ul>
             {note.tags.map((tag, index) => (
               <li key={index} className="note-tag">
