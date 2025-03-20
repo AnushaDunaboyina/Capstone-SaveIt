@@ -1,7 +1,7 @@
 import React from "react";
 import "./LinkDetails.scss";
 
-export default function LinkDetails ({ link, showActions, onEdit, onDelete }) {
+export default function LinkDetails({ link, showActions, onEdit, onDelete }) {
   return (
     <div className="link-details">
       <h3>{link.title}</h3>
@@ -15,25 +15,37 @@ export default function LinkDetails ({ link, showActions, onEdit, onDelete }) {
       {/* Display the thumbnail */}
       {link.thumbnail && (
         <div className="thumbnail-container">
-         
           <img
-            src={link.thumbnail}
+            src={
+              link.thumbnail ||
+              "http://localhost:5050/assets/default-thumbnail1.jpg"
+            }
             alt={`${link.title} Thumbnail`}
             className="link-thumbnail"
+            onError={(e) => {
+              if (e.target.src.includes("default-thumbnail1.jpg")) {
+                console.error(
+                  "Default thumbnail already applied. No further action."
+                );
+                return;
+              }
+              e.target.src =
+                "http://localhost:5050/assets/default-thumbnail1.jpg"; // Apply fallback
+            }}
           />
         </div>
       )}
 
-
-      
       {link.tags && link.tags.length > 0 && (
         <div className="link-tags">
-            <p>Tags:</p>
-            <ul>
-                {link.tags.map((tag, index) => (
-                    <li key={index} className="link-tag">{tag}</li>
-                ))}
-            </ul>
+          <p>Tags:</p>
+          <ul>
+            {link.tags.map((tag, index) => (
+              <li key={index} className="link-tag">
+                {tag}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
       {showActions && (
@@ -48,6 +60,4 @@ export default function LinkDetails ({ link, showActions, onEdit, onDelete }) {
       )}
     </div>
   );
-};
-
-
+}

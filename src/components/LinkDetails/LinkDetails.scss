@@ -20,3 +20,11 @@
     display: inline-block; /* Keep tags inline */
   }
   
+  .link-thumbnail {
+    width: 436px; // Set desired width
+    height: 228px; // Set desired height
+    object-fit: cover; // Maintain aspect ratio and crop to fit
+    // border-radius: 5px; // Optional: Add rounded corners
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Optional: Add a subtle shadow
+  }
+  
