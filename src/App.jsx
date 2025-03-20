@@ -3,6 +3,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 // import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
+import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import NotesPage from "./pages/NotesPage/NotesPage";
 import NoteAddForm from "./components/NoteAddForm/NoteAddForm";
 import NoteDetails from "./components/NoteDetails/NoteDetails";
@@ -16,9 +17,8 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import DocumentEdit from "./components/DocumentEdit/DocumentEdit";
 import DocumentDetails from "./components/DocumentDetails/DocumentDetails";
 
-import { API_URL } from "./config";
+// import { API_URL } from "./config";
 
-console.log("API_URL in App:", API_URL);
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/notes/add" element={<NoteAddForm />} />
         <Route path="/notes/:id" element={<NoteDetails />} />

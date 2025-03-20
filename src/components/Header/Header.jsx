@@ -32,6 +32,11 @@ export default function Header() {
               <button className="header__button">documents</button>
             </Link>
           </li>
+          {/* <li className="header__item">
+            <Link to="/calendar" className="header__link">
+              <button className="header__button">Calendar</button>
+            </Link>
+          </li> */}
         </div>
       </ul>
     </nav>

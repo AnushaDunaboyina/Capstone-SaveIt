@@ -1,9 +1,18 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom";
 
-const HomePage = () => {
+export default function HomePage() {
+  const navigate = useNavigate();
+
+  const handleCalendarClick = () => {
+    navigate("/calendar"); // Navigate to CalendarPage
+  };
+
   return (
-    <div>HomePage</div>
-  )
+    <div>
+      <h1>Welcome to SaveIt</h1>
+      <button onClick={handleCalendarClick}>Go to Calendar</button>
+    </div>
+  );
 }
 
-export default HomePage;
+

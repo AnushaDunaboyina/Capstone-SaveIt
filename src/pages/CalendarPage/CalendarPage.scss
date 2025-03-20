@@ -1,0 +1,48 @@
+.calendar-page {
+    padding: 1rem;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .calendar-header select,
+  .calendar-header input {
+    margin: 0 0.5rem;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); // 7 columns for the week
+    gap: 0.5rem;
+  }
+  
+  .calendar-cell {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    position: relative;
+    min-height: 5rem;
+    cursor: text;
+  }
+  
+  .calendar-cell .date-label {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .calendar-cell:focus {
+    outline: 2px solid #007bff;
+  }
+  
+  .calendar-cell.empty {
+    background-color: #eaeaea;
+    pointer-events: none;
+  }
+  

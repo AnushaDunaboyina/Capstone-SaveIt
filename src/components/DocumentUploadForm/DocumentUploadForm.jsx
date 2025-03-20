@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react"; // Need state management to 
 import axios from "axios"; // axios used to send http requests to the backend
 import { API_URL } from "../../config"; // API_URL is the base URL
 
-console.log("API_URL in DocumentUploadForm:", API_URL);
-
 export default function DocumentUploadForm({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState("");
