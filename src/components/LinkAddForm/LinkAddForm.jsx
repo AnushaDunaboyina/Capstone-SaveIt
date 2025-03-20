@@ -11,18 +11,12 @@ export default function LinkAddForm() {
   const [protocol, setProtocol] = useState("https://");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSave = async () => {
-    if (
-      !title.trim() ||
-      !url.trim() ||
-      !tags.trim() ||
-      !description.trim() ||
-      !thumbnail.trim()
-    ) {
+    if (!title.trim() || !url.trim() || !tags.trim() || !description.trim()) {
       setError("All fields must be filled.");
       return;
     }
@@ -40,17 +34,17 @@ export default function LinkAddForm() {
 
       // Split and trim tags
       const updatedTags = tags.split(",").map((tag) => tag.trim());
-    
 
       const response = await axios.post(`${API_URL}/api/links`, {
         title: title.trim(),
         url: fullUrl,
         description: description.trim(),
-        thumbnail: thumbnail.trim(),
+
         tags: updatedTags, // Send as an array
       });
 
       console.log("Response from Server:", response.data);
+
       alert("Link added successfully!");
       navigate("/links"); // Navigate back to links page
     } catch (err) {
@@ -110,16 +104,6 @@ export default function LinkAddForm() {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </div>
-
-      <div>
-        <label>Thumbnail URL:</label>
-        <input
-          type="text"
-          value={thumbnail}
-          onChange={(e) => setThumbnail(e.target.value)}
           required
         />
       </div>

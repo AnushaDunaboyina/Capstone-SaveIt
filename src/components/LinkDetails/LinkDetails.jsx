@@ -7,9 +7,25 @@ export default function LinkDetails ({ link, showActions, onEdit, onDelete }) {
       <h3>{link.title}</h3>
       <p>Created on: {link.displayDate}</p>
       <p>{link.description}</p>
+
       <a href={link.url} target="_blank" rel="noopener noreferrer">
         {link.url}
       </a>
+
+      {/* Display the thumbnail */}
+      {link.thumbnail && (
+        <div className="thumbnail-container">
+         
+          <img
+            src={link.thumbnail}
+            alt={`${link.title} Thumbnail`}
+            className="link-thumbnail"
+          />
+        </div>
+      )}
+
+
+      
       {link.tags && link.tags.length > 0 && (
         <div className="link-tags">
             <p>Tags:</p>
