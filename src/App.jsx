@@ -17,8 +17,6 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import DocumentEdit from "./components/DocumentEdit/DocumentEdit";
 import DocumentDetails from "./components/DocumentDetails/DocumentDetails";
 
-// import { API_URL } from "./config";
-
 
 function App() {
   return (
