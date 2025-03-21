@@ -13,7 +13,7 @@ export default function NoteDetails({
 
   const toggleView = () => {
     setIsExpanded(!isExpanded);
-    
+
     if (!isExpanded && onView) {
       onView(note);
     }
@@ -21,36 +21,43 @@ export default function NoteDetails({
 
   return (
     <div
-      className={`note-details ${isExpanded ? "expanded" : ""}`}
+      className={`note-details ${isExpanded ? "note-details--expanded" : ""}`}
       style={{ backgroundColor: note.color }}
       onClick={toggleView}
     >
-     
+      <div className="note-details__header">
+        <h3 className="note-details__title">{note.title}</h3>
+        <p className="note-details__date">{note.displayDate}</p>
+      </div>
       
-      <h3>{note.title}</h3>
-      <p> {note.displayDate}</p>
-      <p>{isExpanded ? note.content : `${note.content.slice(0, 10)}...`}</p>
-      
-      {note.tags && note.tags.length > 0 && (
-        <div className="note-tags">
-          
-          <ul>
-            {note.tags.map((tag, index) => (
-              <li key={index} className="note-tag">
-                {tag}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className="note-details__divider"></div>
+
+      <div className="note-details__content">
+        <p className="note-details__text">
+          {isExpanded ? note.content : `${note.content.slice(0, 30)}.....`}
+        </p>
+
+        {note.tags && note.tags.length > 0 && (
+          <div className="note-details__tags">
+            <ul className="note-details__tags-list">
+              {note.tags.map((tag, index) => (
+                <li key={index} className="note-details__tag-item">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
       {showActions && (
-        <div className="note-actions">
+        <div className="note-details__actions">
           <button
             onClick={(e) => {
               e.stopPropagation();
               onEdit();
             }}
-            className="edit-button"
+            className="note-details__edit-button"
           >
             Edit
           </button>
@@ -59,7 +66,7 @@ export default function NoteDetails({
               e.stopPropagation();
               onDelete();
             }}
-            className="delete-button"
+            className="note-details__delete-button"
           >
             Delete
           </button>

@@ -5,6 +5,11 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import NotesList from "../../components/NotesList/NotesList"; // Reusable NotesList Component
 import { API_URL } from "../../config";
 import axios from "axios";
+import "./NotesPage.scss";
+
+import addNote from "../../assets/icons/add-note2.png";
+import sort from "../../assets/icons/sort.png";
+
 
 export default function NotesPage() {
   const [notes, setNotes] = useState([]);
@@ -63,66 +68,105 @@ export default function NotesPage() {
 
   return (
     <div className="notes-page">
-      <h2>NOTES</h2>
-      <div>
-        <SearchBar onSearch={setSearchQuery} placeholder="Search notes..." />
-      </div>
-      <div>
-        <button onClick={() => navigate("/notes/add")} className="add-button">
-          Add Note
-        </button>
+      <h2 className="notes-page__title">Welcome to notes page</h2>
+
+      <div className="notes-page__toolbar">
+        <div className="notes-page__search-bar">
+          <input
+            type="text"
+            className="notes-page__search-bar-input"
+            placeholder="Search notes..."
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <span className="notes-page__search-bar-icon">🔍</span>
+        </div>
+
+        <div className="notes-page__sorting-controls">
+          <img className="notes-page__sort-icon" src={sort} alt="sort icon" />
+
+          <div className="notes-page__sort-buttons">
+            <select
+              id="sortBy"
+              className="notes-page__sort-by"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option className="notes-page__sort-option" value="createdAt">
+                Date
+              </option>
+              <option className="notes-page__sort-option" value="title">
+                Title
+              </option>
+            </select>
+
+            <select
+              id="sortOrder"
+              className="notes-page__sort-order"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option className="notes-page__sort-option" value="desc">
+                Desc
+              </option>
+              <option className="notes-page__sort-option" value="asc">
+                Asc
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div className="notes-page__add-note">
+          <img
+            src={addNote}
+            alt="Add Note"
+            className="notes-page__add-note-icon"
+            onClick={() => navigate("/notes/add")}
+          />
+        </div>
       </div>
 
-      <div className="sorting-controls">
-        <label htmlFor="sortBy">Sort by:</label>
-        <select
-          id="sortBy"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
-          <option value="createdAt">Date</option>
-          <option value="title">Title</option>
-        </select>
-
-        <select
-          id="sortOrder"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="desc">Desc</option>
-          <option value="asc">Asc</option>
-        </select>
-      </div>
-      <div>
+      <div className="notes-page__view-all">
         {!viewAll ? (
-          <button onClick={() => setViewAll(true)}>View All</button>
+          <button
+            className="notes-page__view-all-button"
+            onClick={() => setViewAll(true)}
+          >
+            View All
+          </button>
         ) : (
-          <button onClick={() => setViewAll(false)}>Show Less</button>
+          <button
+            className="notes-page__show-less-button"
+            onClick={() => setViewAll(false)}
+          >
+            Show Less
+          </button>
         )}
       </div>
-      <div></div>
-      <NotesList
-        notes={displayedNotes}
-        onEdit={(id) => navigate(`/notes/${id}/edit`)}
-        onDelete={(note) => {
-          setDeleteNote(note);
-          setShowDeleteModal(true);
-        }}
-        onView={(note) => {
-          {
-            note.title;
-          }
-        }}
-      />
 
-      {showDeleteModal && (
-        <DeleteModal
-          show={showDeleteModal}
-          onClose={() => setShowDeleteModal(false)}
-          onConfirm={() => handleDelete(deleteNote.id)}
-          itemName={deleteNote?.title}
+      <div>
+        <NotesList
+          notes={displayedNotes}
+          onEdit={(id) => navigate(`/notes/${id}/edit`)}
+          onDelete={(note) => {
+            setDeleteNote(note);
+            setShowDeleteModal(true);
+          }}
+          onView={(note) => {
+            {
+              note.title;
+            }
+          }}
         />
-      )}
+
+        {showDeleteModal && (
+          <DeleteModal
+            show={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={() => handleDelete(deleteNote.id)}
+            itemName={deleteNote?.title}
+          />
+        )}
+      </div>
     </div>
   );
 }

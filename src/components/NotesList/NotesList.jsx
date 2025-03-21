@@ -1,5 +1,6 @@
 import React from "react";
-import NoteDetails from "../NoteDetails/NoteDetails"; // Component for individual notes
+import NoteDetails from "../NoteDetails/NoteDetails";
+import "./NotesList.scss";
 
 export default function NotesList({ notes, onEdit, onDelete, onView }) {
   return (
@@ -11,11 +12,9 @@ export default function NotesList({ notes, onEdit, onDelete, onView }) {
           showActions={true}
           onEdit={() => onEdit(note.id)}
           onDelete={() => onDelete(note)}
-          onView={() => onView(note)} // Pass view action
+          onView={() => onView(note)}
         />
       ))}
     </div>
   );
-};
-
-
+}

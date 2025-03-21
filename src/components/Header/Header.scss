@@ -2,19 +2,22 @@
 @use "../../styles/partials/mixins" as *;
 
 .header {
-    background-color: $blue-light;
-    padding: 16px;
+    background-color: rgb(203, 203, 255);
+    background: linear-gradient(to right, rgb(203, 203, 255), rgb(150, 150, 255));
+    padding: 22px;
     
   &__list {
     list-style: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
   }
 
   &__nav {
     display: flex;
     justify-content: space-around;
-    gap: 12px;
+    align-items: center;
+    gap: 32px;
   }
 
   &__button {
@@ -24,6 +27,21 @@
     font-family: $font-family-primary;
     text-transform: uppercase;
     font-weight: 700;
-    color: $navy;
+    color: black;
+    background-color: rgb(251, 252, 231);
+    padding: 6px 10px;
+    border-radius: 12px;
+  }
+
+  &__logo {
+    background-color: none;
+    max-width: 180px;
+    padding-top: 4px;
+  }
+
+  &__calendar-icon {
+    max-width: 32px;
+    display: flex;
+    align-items: center;
   }
 }
