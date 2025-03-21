@@ -1,0 +1,50 @@
+.emoji-picker {
+    display: flex;
+    flex-wrap: wrap; /* Makes emojis wrap to the next line if there's no space */
+    gap: 10px; /* Adds spacing between emojis */
+    padding: 10px;
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    max-width: 300px; /* Optional: limit width */
+    margin: 0 auto; /* Center the picker if necessary */
+  }
+  .emoji-button {
+    font-size: 1.5rem; /* Make emojis bigger */
+    padding: 5px;
+    border: none;
+    background-color: transparent; /* No background for a clean look */
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  .emoji-button:hover {
+    background-color: #f0f0f0; /* Add a subtle background on hover */
+    border-radius: 50%; /* Circle-like highlight */
+    transform: scale(1.2); /* Slight zoom-in effect on hover */
+  }
+  .emoji-picker-close-button {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    background-color: #ff4d4d; /* Red button */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .emoji-picker-close-button:hover {
+    background-color: #cc0000; /* Darker red on hover */
+  }
+  .emoji-category {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #444; /* Dark gray */
+    border-bottom: 1px solid #ddd; /* Underline for category separator */
+    padding-bottom: 5px;
+  }
+  

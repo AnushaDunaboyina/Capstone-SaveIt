@@ -66,4 +66,20 @@
     background: #e0e0e0;
     color: black;
   }
+  .emoji-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .emoji-button {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .emoji-button:hover {
+    transform: scale(1.2);
+  }
   
