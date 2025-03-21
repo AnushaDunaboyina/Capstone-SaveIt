@@ -30,7 +30,7 @@ export default function LinkAddForm() {
         url.trim().startsWith("http://") || url.trim().startsWith("https://")
           ? url.trim() // Use the user-provided URL as is
           : `${protocol}${url.trim()}`; // Otherwise, prepend the selected protocol
-      console.log("Final URL being sent:", fullUrl); // Debug log
+      
 
       // Split and trim tags
       const updatedTags = tags.split(",").map((tag) => tag.trim());
@@ -45,7 +45,7 @@ export default function LinkAddForm() {
 
       console.log("Response from Server:", response.data);
 
-      alert("Link added successfully!");
+      // alert("Link added successfully!");
       navigate("/links"); // Navigate back to links page
     } catch (err) {
       console.error("Error adding link:", err);

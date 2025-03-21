@@ -5,7 +5,7 @@ export default function LinkDetails({ link, showActions, onEdit, onDelete }) {
   return (
     <div className="link-details">
       <h3>{link.title}</h3>
-      <p>Created on: {link.displayDate}</p>
+      <p>{link.displayDate}</p>
       <p>{link.description}</p>
 
       <a href={link.url} target="_blank" rel="noopener noreferrer">
@@ -23,14 +23,10 @@ export default function LinkDetails({ link, showActions, onEdit, onDelete }) {
             alt={`${link.title} Thumbnail`}
             className="link-thumbnail"
             onError={(e) => {
-              if (e.target.src.includes("default-thumbnail1.jpg")) {
-                console.error(
-                  "Default thumbnail already applied. No further action."
-                );
-                return;
+              if (!e.target.src.includes("default-thumbnail1.jpg")) {
+                e.target.src =
+                  "http://localhost:5050/assets/default-thumbnail1.jpg"; // Apply fallback
               }
-              e.target.src =
-                "http://localhost:5050/assets/default-thumbnail1.jpg"; // Apply fallback
             }}
           />
         </div>
@@ -38,7 +34,6 @@ export default function LinkDetails({ link, showActions, onEdit, onDelete }) {
 
       {link.tags && link.tags.length > 0 && (
         <div className="link-tags">
-          <p>Tags:</p>
           <ul>
             {link.tags.map((tag, index) => (
               <li key={index} className="link-tag">
