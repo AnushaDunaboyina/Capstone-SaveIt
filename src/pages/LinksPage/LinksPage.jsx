@@ -88,8 +88,8 @@ export default function LinksPage() {
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
         >
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
+          <option value="desc">Desc</option>
+          <option value="asc">Asc</option>
         </select>
       </div>
       <div>

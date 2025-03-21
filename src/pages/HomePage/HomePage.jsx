@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Welcome to SaveIt</h1>
-      <button onClick={handleCalendarClick}>Go to Calendar</button>
+      <button onClick={handleCalendarClick}>Calendar</button>
     </div>
   );
 }

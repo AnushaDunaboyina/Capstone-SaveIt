@@ -144,8 +144,8 @@ export default function DocumentList() {
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           >
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
+            <option value="desc">Desc</option>
+            <option value="asc">Asc</option>
           </select>
         </div>
         <h2>Documents</h2>
@@ -164,7 +164,7 @@ export default function DocumentList() {
 
                 {document.tags && document.tags.length > 0 && (
                   <div className="document-tags">
-                    <p>Tags:</p>
+                    {/* <p>Tags:</p> */}
                     <ul>
                       {Array.isArray(document.tags)
                         ? document.tags.map((tag, index) => (

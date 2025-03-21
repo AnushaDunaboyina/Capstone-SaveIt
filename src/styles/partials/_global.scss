@@ -12,6 +12,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+
 }
 
 #root {
@@ -20,13 +21,16 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
-    font-family: $font-family-primary;
-    font-weight: 700;
-    color: $black;
+h1,
+h2,
+h3 {
+  font-family: $font-family-primary;
+  font-weight: 700;
+  color: $black;
 }
 
-body, p {
+body,
+p {
   font-family: $font-family-secondary;
   font-weight: 400;
   color: $black;

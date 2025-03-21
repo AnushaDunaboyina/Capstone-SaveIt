@@ -1,48 +1,70 @@
 .calendar-page {
-    padding: 1rem;
-  }
-  
-  .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .calendar-header select,
-  .calendar-header input {
-    margin: 0 0.5rem;
-  }
-  
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); // 7 columns for the week
-    gap: 0.5rem;
-  }
-  
-  .calendar-cell {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    position: relative;
-    min-height: 5rem;
-    cursor: text;
-  }
-  
-  .calendar-cell .date-label {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-  
-  .calendar-cell:focus {
-    outline: 2px solid #007bff;
-  }
-  
-  .calendar-cell.empty {
-    background-color: #eaeaea;
-    pointer-events: none;
-  }
-  
+  padding: 1rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-header select,
+.calendar-header input {
+  margin: 0 0.5rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for the week */
+  gap: 0.5rem;
+}
+
+.calendar-cell {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  position: relative;
+  min-height: auto;
+  cursor: text;
+  height: auto; /* Adjust height as needed */
+  overflow: visible; /* Enable vertical scrolling */
+}
+
+.calendar-cell .date-label {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.calendar-cell:focus {
+  outline: 2px solid #007bff;
+}
+
+.calendar-cell.empty {
+  background-color: #eaeaea;
+  pointer-events: none;
+}
+
+.rbc-event {
+
+  margin-top: -16px; /* Moves the event slightly upwards */
+  line-height: 1; /* Ensures text fits nicely */
+  padding: 3px; /* Adds spacing for better readability */
+}
+
+.rbc-event-content {
+  font-size: 13px;
+  white-space: normal !important; 
+  word-break: break-word; /* Breaks long words if needed */
+  overflow: visible; /* Ensures the full content is displayed */
+}
+
+.rbc-agenda-view .rbc-event-cell {
+  color: white; /* Change text color to white */
+}
+
+
+

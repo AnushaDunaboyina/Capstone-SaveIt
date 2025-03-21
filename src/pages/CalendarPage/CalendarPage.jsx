@@ -111,11 +111,11 @@ export default function CalendarPage() {
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
+        style={{ height: 700 }}
         selectable
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
-        onDoubleClickEvent={handleDoubleClickEvent} // Add this for double-click functionality
+        onDoubleClickEvent={handleDoubleClickEvent}
         eventPropGetter={(event) => ({
           style: {
             backgroundColor:
@@ -126,6 +126,8 @@ export default function CalendarPage() {
               event.type === "To-Do" && event.isCompleted
                 ? "line-through"
                 : "none",
+            whiteSpace: "normal", // Ensures text wraps properly
+            height: "auto", // Adjusts height dynamically
           },
         })}
       />
