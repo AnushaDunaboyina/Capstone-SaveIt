@@ -44,6 +44,7 @@ export default function Header() {
               className="header__calendar-icon"
               src={calendar}
               alt="calendar icon"
+              title="Calendar"
             />
           </Link>
         </div>

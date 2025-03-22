@@ -5,6 +5,10 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import LinkList from "../../components/LinksList/LinksList";
 import { API_URL } from "../../config";
 import axios from "axios";
+import "./LinksPage.scss";
+
+import addLink from "../../assets/icons/add-link.png";
+import sort from "../../assets/icons/sort.png";
 
 export default function LinksPage() {
   const [links, setLinks] = useState([]);
@@ -61,54 +65,106 @@ export default function LinksPage() {
 
   return (
     <div className="links-page">
-      <h2>LINKS</h2>
-      <div>
-        <SearchBar onSearch={setSearchQuery} placeholder="Search links..." />
-      </div>
-      <div>
-        <button onClick={() => navigate("/links/add")} className="add-button">
-          Add Link
-        </button>
+      <h2 className="links-page__title">Welcome to Links Page</h2>
+
+      {/* Search Bar */}
+      <div className="links-page__toolbar">
+        <div className="links-page__search-bar">
+          <input
+            type="text"
+            className="links-page__search-bar-input"
+            placeholder="Search links..."
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <span className="links-page__search-bar-icon">🔍</span>
+        </div>
+
+        {/* Sorting Controls */}
+        <div className="links-page__sorting-controls">
+          <img
+            className="links-page__sort-icon"
+            src={sort}
+            alt="Sort icon"
+            title="Sort by"
+          />
+
+          <div className="links-page__sort-buttons">
+            <select
+              id="sortBy"
+              className="links-page__sort-by"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option className="links-page__sort-option" value="createdAt">
+                Date
+              </option>
+              <option className="links-page__sort-option" value="title">
+                Title
+              </option>
+            </select>
+
+            <select
+              id="sortOrder"
+              className="links-page__sort-order"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option className="links-page__sort-option" value="desc">
+                Desc
+              </option>
+              <option className="links-page__sort-option" value="asc">
+                Asc
+              </option>
+            </select>
+          </div>
+        </div>
+
+        {/* Add Link Button */}
+        <div className="links-page__add-link">
+          <img
+            src={addLink}
+            alt="Add Link"
+            title="Add Link"
+            className="links-page__add-link-icon"
+            onClick={() => navigate("/links/add")}
+          />
+        </div>
       </div>
 
-      <div className="sorting-controls">
-        <label htmlFor="sortBy">Sort by:</label>
-        <select
-          id="sortBy"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
-          <option value="createdAt">Date</option>
-          <option value="title">Title</option>
-        </select>
+      <div className="links-page__divider"></div>
 
-        {/* <label htmlFor="sortOrder">Order:</label> */}
-        <select
-          id="sortOrder"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="desc">Desc</option>
-          <option value="asc">Asc</option>
-        </select>
-      </div>
-      <div>
+      {/* View All/Show Less Button */}
+      <div className="links-page__view-all">
         {!viewAll ? (
-          <button onClick={() => setViewAll(true)}>View All</button>
+          <button
+            className="links-page__view-all-button"
+            onClick={() => setViewAll(true)}
+          >
+            View All
+          </button>
         ) : (
-          <button onClick={() => setViewAll(false)}>Show Less</button>
+          <button
+            className="links-page__show-less-button"
+            onClick={() => setViewAll(false)}
+          >
+            Show Less
+          </button>
         )}
       </div>
-      <div></div>
-      <LinkList
-        links={displayedLinks}
-        onEdit={(id) => navigate(`/links/${id}/edit`)}
-        onDelete={(link) => {
-          setDeleteLink(link);
-          setShowDeleteModal(true);
-        }}
-      />
 
+      {/* Links List */}
+      <div>
+        <LinkList
+          links={displayedLinks}
+          onEdit={(id) => navigate(`/links/${id}/edit`)}
+          onDelete={(link) => {
+            setDeleteLink(link);
+            setShowDeleteModal(true);
+          }}
+        />
+      </div>
+
+      {/* Delete Modal */}
       {showDeleteModal && (
         <DeleteModal
           show={showDeleteModal}

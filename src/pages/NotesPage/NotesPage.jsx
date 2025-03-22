@@ -10,7 +10,6 @@ import "./NotesPage.scss";
 import addNote from "../../assets/icons/add-note2.png";
 import sort from "../../assets/icons/sort.png";
 
-
 export default function NotesPage() {
   const [notes, setNotes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,7 +29,7 @@ export default function NotesPage() {
         const response = await axios.get(`${API_URL}/api/notes`, {
           params: { search: searchQuery },
         });
-       
+
         setNotes(response.data);
       } catch (error) {
         console.error("Failed to fetch notes:", error);
@@ -69,80 +68,86 @@ export default function NotesPage() {
   return (
     <div className="notes-page">
       <h2 className="notes-page__title">Welcome to notes page</h2>
+      <div className="notes-page__header-container">
+        <div className="notes-page__toolbar">
+          <div className="notes-page__search-bar">
+            <input
+              type="text"
+              className="notes-page__search-bar-input"
+              placeholder="Search notes..."
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <span className="notes-page__search-bar-icon">🔍</span>
+          </div>
 
-      <div className="notes-page__toolbar">
-        <div className="notes-page__search-bar">
-          <input
-            type="text"
-            className="notes-page__search-bar-input"
-            placeholder="Search notes..."
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <span className="notes-page__search-bar-icon">🔍</span>
-        </div>
+          <div className="notes-page__sorting-controls">
+            <img
+              className="notes-page__sort-icon"
+              src={sort}
+              alt="sort icon"
+              title="sort by"
+            />
 
-        <div className="notes-page__sorting-controls">
-          <img className="notes-page__sort-icon" src={sort} alt="sort icon" />
+            <div className="notes-page__sort-buttons">
+              <select
+                id="Sort by"
+                className="notes-page__sort-by"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option className="notes-page__sort-option" value="createdAt">
+                  Date
+                </option>
+                <option className="notes-page__sort-option" value="title">
+                  Title
+                </option>
+              </select>
 
-          <div className="notes-page__sort-buttons">
-            <select
-              id="sortBy"
-              className="notes-page__sort-by"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option className="notes-page__sort-option" value="createdAt">
-                Date
-              </option>
-              <option className="notes-page__sort-option" value="title">
-                Title
-              </option>
-            </select>
+              <select
+                id="sortOrder"
+                className="notes-page__sort-order"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+              >
+                <option className="notes-page__sort-option" value="desc">
+                  Desc
+                </option>
+                <option className="notes-page__sort-option" value="asc">
+                  Asc
+                </option>
+              </select>
+            </div>
+          </div>
 
-            <select
-              id="sortOrder"
-              className="notes-page__sort-order"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option className="notes-page__sort-option" value="desc">
-                Desc
-              </option>
-              <option className="notes-page__sort-option" value="asc">
-                Asc
-              </option>
-            </select>
+          <div className="notes-page__add-note">
+            <img
+              title="Add Note"
+              src={addNote}
+              alt="Add Note"
+              className="notes-page__add-note-icon"
+              onClick={() => navigate("/notes/add")}
+            />
           </div>
         </div>
 
-        <div className="notes-page__add-note">
-          <img
-            src={addNote}
-            alt="Add Note"
-            className="notes-page__add-note-icon"
-            onClick={() => navigate("/notes/add")}
-          />
+        <div className="notes-page__view-all">
+          {!viewAll ? (
+            <button
+              className="notes-page__view-all-button"
+              onClick={() => setViewAll(true)}
+            >
+              View All
+            </button>
+          ) : (
+            <button
+              className="notes-page__show-less-button"
+              onClick={() => setViewAll(false)}
+            >
+              Show Less
+            </button>
+          )}
         </div>
       </div>
-
-      <div className="notes-page__view-all">
-        {!viewAll ? (
-          <button
-            className="notes-page__view-all-button"
-            onClick={() => setViewAll(true)}
-          >
-            View All
-          </button>
-        ) : (
-          <button
-            className="notes-page__show-less-button"
-            onClick={() => setViewAll(false)}
-          >
-            Show Less
-          </button>
-        )}
-      </div>
-
       <div>
         <NotesList
           notes={displayedNotes}

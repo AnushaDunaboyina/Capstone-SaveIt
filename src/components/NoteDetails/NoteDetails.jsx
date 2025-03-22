@@ -55,6 +55,7 @@ export default function NoteDetails({
         {showActions && (
           <div className="note-details__actions">
             <img
+            title="Edit"
               src={editNote}
               alt="Edit"
               className="note-details__action-icon"
@@ -65,6 +66,7 @@ export default function NoteDetails({
             />
 
             <img
+            title="Delete"
               src={deleteNote}
               alt="Delete"
               className="note-details__action-icon"
