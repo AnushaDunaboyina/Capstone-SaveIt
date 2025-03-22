@@ -1,0 +1,123 @@
+.document-upload-form {
+  .document-upload-form__upload-icon {
+    cursor: pointer; /* Ensure the upload icon is clickable */
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .document-upload-form__modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .document-upload-form__modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .document-upload-form__go-back-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  .document-upload-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .document-upload-form__form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .document-upload-form__file-label {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e2e2e2;
+    }
+  }
+
+  .document-upload-form__file-input {
+    display: none; /* Hide the default file input button */
+  }
+
+  .document-upload-form__file-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .document-upload-form__text-input {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #6ab7ff;
+    }
+  }
+
+  .document-upload-form__submit-button {
+    padding: 10px 20px;
+    background-color: #6ab7ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: #4a9fff;
+    }
+  }
+
+  .document-upload-form__error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .document-upload-form__success-message {
+    color: #28a745;
+    font-size: 14px;
+    text-align: center;
+  }
+}

@@ -80,16 +80,21 @@ export default function DocumentList() {
   if (error) return <p className="error">{error}</p>;
 
   const sortedDocuments = [...searchResults].sort((a, b) => {
-    let comparison =
-      sortBy === "filename"
-        ? a.filename.localeCompare(b.filename)
-        : new Date(b.createdAt) - new Date(a.createdAt);
-    return sortOrder === "asc" ? comparison : -comparison;
+    let comparison;
+    if (sortBy === "filename") {
+      comparison = a.filename.localeCompare(b.filename);
+    } else if (sortBy === "createdAt") {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      comparison = dateB - dateA; // Descending by default (latest dates first)
+    }
+
+    return sortOrder === "asc" ? -comparison : comparison;
   });
 
   const displayDocuments = viewAll
     ? sortedDocuments
-    : sortedDocuments.slice(0, 3);
+    : sortedDocuments.slice(0, 3); // Show the first 3 documents if "View All" is not selected
 
   return (
     <div className="documents-list">
@@ -108,22 +113,38 @@ export default function DocumentList() {
 
           <div className="documents-list__sorting-controls">
             <img className="documents-list__sort-icon" src={sort} alt="Sort" />
-            <select
-              className="documents-list__sort-by"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="createdAt">Date</option>
-              <option value="filename">Filename</option>
-            </select>
-            <select
-              className="documents-list__sort-order"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option value="desc">Desc</option>
-              <option value="asc">Asc</option>
-            </select>
+            <div className="documents-list__sort-buttons">
+              <select
+                className="documents-list__sort-by"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option
+                  className="documents-list__sort-option"
+                  value="createdAt"
+                >
+                  Date
+                </option>
+                <option
+                  className="documents-list__sort-option"
+                  value="filename"
+                >
+                  Filename
+                </option>
+              </select>
+              <select
+                className="documents-list__sort-order"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+              >
+                <option className="documents-list__sort-option" value="desc">
+                  Desc
+                </option>
+                <option className="documents-list__sort-option" value="asc">
+                  Asc
+                </option>
+              </select>
+            </div>
           </div>
 
           <div className="documents-list__upload">
@@ -133,12 +154,22 @@ export default function DocumentList() {
           </div>
         </div>
 
-        <div className="documents-list__header-divider"></div>
-        <div>
+        <div className="documents-list__divider"></div>
+        <div className="documents-list__view-all">
           {!viewAll ? (
-            <button onClick={() => setViewAll(true)}>View All</button>
+            <button
+              className="documents-list__view-all-button"
+              onClick={() => setViewAll(true)}
+            >
+              View All
+            </button>
           ) : (
-            <button onClick={() => setViewAll(false)}>View Sorted</button>
+            <button
+              className="documents-list__show-less-button"
+              onClick={() => setViewAll(false)}
+            >
+              View Sorted
+            </button>
           )}
         </div>
       </div>
@@ -164,26 +195,29 @@ export default function DocumentList() {
                     ))}
                   </ul>
                 )}
-                <a
-                  className="documents-list__file-preview"
-                  href={`http://localhost:5050${document.filepath}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Preview
-                </a>
-                <img
-                  className="documents-list__icon documents-list__icon--edit"
-                  src={editDocument}
-                  alt="Edit"
-                  onClick={() => handleEditDocument(document)}
-                />
-                <img
-                  className="documents-list__icon documents-list__icon--delete"
-                  src={deleteDocument}
-                  alt="Delete"
-                  onClick={() => handleDeleteClick(document)}
-                />
+
+                <div>
+                  <a
+                    className="documents-list__file-preview"
+                    href={`http://localhost:5050${document.filepath}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Preview
+                  </a>
+                  <img
+                    className="documents-list__icon documents-list__icon--edit"
+                    src={editDocument}
+                    alt="Edit"
+                    onClick={() => handleEditDocument(document)}
+                  />
+                  <img
+                    className="documents-list__icon documents-list__icon--delete"
+                    src={deleteDocument}
+                    alt="Delete"
+                    onClick={() => handleDeleteClick(document)}
+                  />
+                </div>
               </li>
             ))
           ) : (
