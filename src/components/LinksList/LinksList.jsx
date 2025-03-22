@@ -1,5 +1,6 @@
 import React from "react";
 import LinkDetails from "../LinkDetails/LinkDetails";
+import "./LinksList.scss";
 
 export default function LinkList({ links, onEdit, onDelete }) {
   return (

@@ -1,8 +1,7 @@
 @use "../../styles/partials/variables" as *;
 
 .notes-page {
-
-  padding: 32px 60px;
+  padding: 32px 100px;
 
 
   &__header-container{
@@ -13,7 +12,7 @@
 
   &__title {
     font-size: 24px;
-    padding: 16px;
+    padding: 16px 0;
   }
 
   &__toolbar {
