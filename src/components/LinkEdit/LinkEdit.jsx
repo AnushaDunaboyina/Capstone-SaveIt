@@ -2,6 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
+import "./LinkEdit.scss";
+
+import back from "../../assets/icons/back3.png";
 
 export default function LinkEdit() {
   const { id } = useParams(); // Extract the link ID from the URL
@@ -16,7 +19,6 @@ export default function LinkEdit() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch the link details using the ID from the URL
     const fetchLink = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/links/${id}`);
@@ -63,7 +65,6 @@ export default function LinkEdit() {
         return;
       }
 
-      // const tagsJson = JSON.stringify(updatedTags);
       console.log("Payload being sent to server:", {
         title: title.trim(),
         url: url.trim(),
@@ -80,9 +81,7 @@ export default function LinkEdit() {
         tags: updatedTags,
       });
 
-      console.log("Response from Server:", response.data);
-      alert("Link updated successfully!");
-      navigate("/links"); // Navigate back to links page
+      navigate("/links");
     } catch (err) {
       console.error("Error updating link:", err);
       if (err.response) {
@@ -96,68 +95,83 @@ export default function LinkEdit() {
 
   return (
     <div className="link-edit">
-      <div onClick={() => navigate("/links")}>
-        <button>Back</button>
+      {/* Back Button */}
+      <div className="link-edit__back" onClick={() => navigate("/links")}>
+        <img
+          src={back}
+          alt="Back"
+          className="link-edit__back-icon"
+          title="Go Back"
+        />
       </div>
-      <h2>Edit Link</h2>
 
-      {error && <p className="error-message">{error}</p>}
+      <h2 className="link-edit__title">Edit Link</h2>
 
-      <div>
-        <label>Title:</label>
+      {error && <p className="link-edit__error-message">{error}</p>}
+
+      <div className="link-edit__field">
         <input
+          title="Title"
           type="text"
+          className="link-edit__input"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          placeholder="Title.."
         />
       </div>
 
-      <div>
-        <label>URL:</label>
+      <div className="link-edit__field">
         <input
+          title="URL"
           type="text"
+          className="link-edit__input"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           required
+          placeholder="Enter URL (with or without http/https)"
         />
       </div>
 
-      <div>
-        <label>Description:</label>
+      <div className="link-edit__field">
         <textarea
+          title="Description"
+          className="link-edit__textarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
+          placeholder="Description..."
         />
       </div>
 
-      <div>
-        <label>Thumbnail URL:</label>
+      <div className="link-edit__field">
         <input
+          title="Tags: comma separated"
           type="text"
-          value={thumbnail}
-          onChange={(e) => setThumbnail(e.target.value)}
-          required
-        />
-      </div>
-
-      <div>
-        <label>Tags (comma-separated):</label>
-        <input
-          type="text"
+          className="link-edit__input"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
           required
+          placeholder="Tags: comma-separated..."
         />
       </div>
 
-      <button onClick={handleSave} disabled={loading}>
-        {loading ? "Saving..." : "Save"}
-      </button>
-      <button onClick={() => navigate("/links")} disabled={loading}>
-        Cancel
-      </button>
+      <div className="link-edit__actions">
+        <button
+          className="link-edit__save-button"
+          onClick={handleSave}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save"}
+        </button>
+        <button
+          className="link-edit__cancel-button"
+          onClick={() => navigate("/links")}
+          disabled={loading}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }

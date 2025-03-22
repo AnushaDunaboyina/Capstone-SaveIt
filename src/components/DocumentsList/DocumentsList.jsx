@@ -7,6 +7,11 @@ import { useNavigate } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import "./DocumentsList.scss";
 
+import sortby from "../../assets/icons/sort.png";
+import addDocument from "../../assets/icons/add-file.png";
+import editDocument from "../../assets/icons/edit1.png";
+import deleteDocument from "../../assets/icons/delete.png";
+
 export default function DocumentList() {
   const navigate = useNavigate();
 
@@ -115,21 +120,15 @@ export default function DocumentList() {
     
 
   return (
-    <>
+    <div className="documents-list">
       <div>
         <SearchBar
           onSearch={handleSearch}
           placeholder="Search by filename or tags..."
         />
-      </div>
 
-      <div>
-        <h2>Upload a Document</h2>
-        <DocumentUploadForm onUploadSuccess={fetchDocuments} />
-      </div>
-      <div>
-        <div className="sorting-controls">
-          <label htmlFor="sortBy">Sort by:</label>
+         <div className="sorting-controls">
+          {/* here we should give sort image */}
           <select
             id="sortBy"
             value={sortBy}
@@ -148,7 +147,7 @@ export default function DocumentList() {
             <option value="asc">Asc</option>
           </select>
         </div>
-        <h2>Documents</h2>
+       
         <div>
           {!viewAll ? (
             <button onClick={() => setViewAll(true)}>View All</button>
@@ -156,6 +155,13 @@ export default function DocumentList() {
             <button onClick={() => setViewAll(false)}>View Sorted</button>
           )}
         </div>
+      </div>
+
+      <div>
+        <DocumentUploadForm onUploadSuccess={fetchDocuments} />
+      </div>
+      <div>
+       
         <ul>
           {displayDocuments.length > 0 ? (
             displayDocuments.map((document) => (
@@ -210,6 +216,6 @@ export default function DocumentList() {
           itemName={deleteDocument?.filename}
         />
       </div>
-    </>
+    </div>
   );
 }

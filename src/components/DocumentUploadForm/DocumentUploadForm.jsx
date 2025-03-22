@@ -6,10 +6,9 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState("");
   const [tags, setTags] = useState("");
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState(null); 
-  const [success, setSuccess] = useState(false); 
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   // Handling user input
 
@@ -61,8 +60,6 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
         }
       );
 
-      console.log("File uploaded successfully:", response.data);
-
       setSuccess(true);
       setError(null);
 
@@ -79,36 +76,31 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
     }
   };
 
- 
-
   return (
     <form onSubmit={handleUpload}>
       <div>
-        <label>File:</label>
         <input type="file" onChange={handleFileChange} />
       </div>
 
       <div>
-        <label>Filename:</label>
-        <input type="text" value={filename} onChange={handleFilenameChange} />
+        <input
+          type="text"
+          title="Filename"
+          placeholder="Enter filename"
+          value={filename}
+          onChange={handleFilenameChange}
+        />
       </div>
 
       <div>
-        <label>Tags (comma seperated)</label>
-        <input type="text" value={tags} onChange={handleTagsChange} />
+        <input
+          type="text"
+          title="Tags: comma seperated"
+          placeholder="Enter tags (comma seperated)"
+          value={tags}
+          onChange={handleTagsChange}
+        />
       </div>
-
-      {/* <div>
-        <label>Filename:</label>
-        <input type="text" value={filename} onChange={handleFilenameChange} />
-        {filenameError && <p className="error-message">{filenameError}</p>}
-      </div>
-
-      <div>
-        <label>Tags (comma separated):</label>
-        <input type="text" value={tags} onChange={handleTagsChange} />
-        {tagsError && <p className="error-message">{tagsError}</p>}
-      </div> */}
 
       <button type="submit" disabled={loading || !file || !filename || !tags}>
         {loading ? "Uploading..." : "Upload"}

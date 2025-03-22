@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
+import "./LinkAddForm.scss";
+
+import back from "../../assets/icons/back3.png";
 
 export default function LinkAddForm() {
   const navigate = useNavigate();
@@ -30,7 +33,6 @@ export default function LinkAddForm() {
         url.trim().startsWith("http://") || url.trim().startsWith("https://")
           ? url.trim() // Use the user-provided URL as is
           : `${protocol}${url.trim()}`; // Otherwise, prepend the selected protocol
-      
 
       // Split and trim tags
       const updatedTags = tags.split(",").map((tag) => tag.trim());
@@ -60,70 +62,90 @@ export default function LinkAddForm() {
 
   return (
     <div className="link-add">
-      <div onClick={() => navigate("/links")}>
-        <button>Back</button>
-      </div>
-      <h2>Add New Link</h2>
-
-      {error && <p className="error-message">{error}</p>}
-
-      <div>
-        <label>Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
+      {/* Back Button */}
+      <div className="link-add__back" onClick={() => navigate("/links")}>
+        <img
+          src={back}
+          alt="Back"
+          className="link-add__back-icon"
+          title="Go Back"
         />
       </div>
 
-      <div>
-        <label>Protocol:</label>
-        <select
-          value={protocol}
-          onChange={(e) => setProtocol(e.target.value)} // Update protocol state
-        >
-          <option value="http://">http://</option>
-          <option value="https://">https://</option>
-        </select>
+      <h2 className="link-add__title">Add New Link</h2>
+
+      {error && <p className="link-add__error-message">{error}</p>}
+
+      <div className="link-add__field">
+        <input
+          title="Title"
+          type="text"
+          className="link-add__input"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          placeholder="Title.."
+        />
       </div>
 
-      <div>
-        <label>URL:</label>
+      <div className="link-add__field link-add__field--url-protocol">
+        <div className="link-add__protocol">
+          <select
+            className="link-add__protocol-select"
+            value={protocol}
+            onChange={(e) => setProtocol(e.target.value)}
+          >
+            <option value="http://">http://</option>
+            <option value="https://">https://</option>
+          </select>
+        </div>
         <input
           type="text"
-          placeholder="Enter the URL (e.g., example.com) OR (e.g., https://www.example.com/)"
+          className="link-add__input"
+          placeholder="Enter Enter URL (with or without http/https)"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           required
         />
       </div>
 
-      <div>
-        <label>Description:</label>
+      <div className="link-add__field">
         <textarea
+          className="link-add__textarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
+          placeholder="Description..."
         />
       </div>
 
-      <div>
-        <label>Tags (comma-separated):</label>
+      <div className="link-add__field">
         <input
           type="text"
+          className="link-add__input"
           value={tags}
+          placeholder="Tags: comma-separated.."
           onChange={(e) => setTags(e.target.value)}
           required
         />
       </div>
 
-      <button onClick={handleSave} disabled={loading}>
-        {loading ? "Saving..." : "Save"}
-      </button>
-      <button onClick={() => navigate("/links")} disabled={loading}>
-        Cancel
-      </button>
+      <div className="link-add__actions">
+        <button
+          className="link-add__save-button"
+          onClick={handleSave}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save"}
+        </button>
+        <button
+          className="link-add__cancel-button"
+          onClick={() => navigate("/links")}
+          disabled={loading}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }

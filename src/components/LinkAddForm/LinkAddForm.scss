@@ -1,0 +1,157 @@
+@use "../../styles/partials/variables" as *;
+
+
+.link-add {
+  margin: 4rem 10rem;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+
+  &__back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &-icon {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__title {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+  }
+
+  &__error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  &__field {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    .link-add__input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #333;
+      outline: none;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #6ab7ff;
+      }
+    }
+
+    &--url-protocol {
+      display: flex;
+      flex-direction: row;
+      gap: 10px; /* Gap between URL input and protocol dropdown */
+
+      .link-add__input {
+        flex: 2; /* URL input takes more space */
+      }
+
+      .link-add__protocol-select {
+        flex: 1; /* Protocol dropdown takes less space */
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #333;
+        outline: none;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: #6ab7ff;
+        }
+      }
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+    min-height: 100px;
+
+    &:focus {
+      border-color: #6ab7ff;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+
+    .link-add__save-button {
+      background-color: #6ab7ff;
+      color: #fff;
+
+      &:hover {
+        background-color: #4a9fff;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    .link-add__cancel-button {
+      background-color: #ff6b6b;
+      color: #fff;
+
+      &:hover {
+        background-color: #ff4c4c;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+}
