@@ -30,7 +30,7 @@ export default function NotesPage() {
         const response = await axios.get(`${API_URL}/api/notes`, {
           params: { search: searchQuery },
         });
-        // console.log("Filtered Notes:", response.data);
+       
         setNotes(response.data);
       } catch (error) {
         console.error("Failed to fetch notes:", error);
@@ -64,7 +64,7 @@ export default function NotesPage() {
     return 0;
   });
 
-  const displayedNotes = viewAll ? sortedNotes : sortedNotes.slice(0, 3);
+  const displayedNotes = viewAll ? sortedNotes : sortedNotes.slice(0, 5);
 
   return (
     <div className="notes-page">
