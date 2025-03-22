@@ -63,12 +63,9 @@ export default function NoteEdit() {
         tags: updatedTags,
       };
 
-      // console.log("Payload being sent to server:", payload);
 
       const response = await axios.patch(`${API_URL}/api/notes/${id}`, payload);
 
-      console.log("Response from Server:", response.data);
-      alert("Note updated successfully!");
       navigate("/notes"); // Navigate back to notes page
     } catch (err) {
       console.error("Error updating note:", err);

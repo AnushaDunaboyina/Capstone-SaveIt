@@ -1,10 +1,17 @@
+@use "../../styles/partials/variables" as *;
+
 .note-details {
-  width: 360px;
+  width: 376px; 
+  // transition: all 0.3s ease; /* Smooth resizing transitions */
   border-radius: 8px;
   padding: 16px;
-  margin: 16px 0;
+  margin: 0 auto; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: #333;
+
+  &--expanded {
+    width: 100%; 
+    margin: 16px 0; 
+  }
 
   &__header {
     display: flex;
@@ -23,21 +30,29 @@
 
   &__divider {
     height: 1px;
-    background-color: #ccc;
-    margin: 4px 0;
-    border: none;
+    background-color: $cloud;
+    margin: 8px 0;
   }
 
   &__content {
     padding: 10px 24px;
+    font-size: 16px;
   }
 
   &__text {
-    padding-bottom: 8px;
+    overflow: hidden; /* Default collapsed state: hide excess text */
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent wrapping for collapsed notes */
+
+    .note-details--expanded & {
+      overflow: visible; /* Allow full text to show */
+      text-overflow: unset; /* Remove ellipsis */
+      white-space: pre-wrap; /* Preserve line breaks and wrap text */
+    }
   }
 
-  &-tags {
-    margin-top: 8px;
+  &__tags {
+    margin-top: 18px;
   }
 
   &__tags-list {
@@ -47,45 +62,23 @@
 
   &__tag-item {
     display: inline-block;
-    background-color: #f0f0f0;
-    margin: 4px;
-    padding: 4px 8px;
-    border-radius: 4px;
+    border: 1px solid $cloud;
+    background-color: $white;
+    margin-right: 4px;
+    padding: 3px 8px;
+    border-radius: 12px;
     font-size: 14px;
   }
 
   &__actions {
-    margin-top: 16px;
-  }
-  &__edit-button,
-  &__delete-button {
-    margin-right: 8px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 24px;
   }
 
-  &__edit-button {
-    background-color: #4caf50;
-    color: white;
-  }
-
-  &__delete-button {
-    background-color: #f44336;
-    color: white;
-  }
-
-  /* Default collapsed content styling */
-  &__text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; /* Ensure content stays in one line */
-  }
-
-  &--expanded &__text {
-    overflow: visible;
-    text-overflow: unset;
-    white-space: pre-wrap; /* Allow text to wrap and preserve line breaks */
+  &__action-icon {
+    width: 20px;
   }
 }

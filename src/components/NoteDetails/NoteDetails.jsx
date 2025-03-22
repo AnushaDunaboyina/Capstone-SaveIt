@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NoteDetails.scss";
-import { useState } from "react";
+import editNote from "../../assets/icons/edit1.png";
+import deleteNote from "../../assets/icons/delete.png";
 
 export default function NoteDetails({
   note,
@@ -29,7 +30,7 @@ export default function NoteDetails({
         <h3 className="note-details__title">{note.title}</h3>
         <p className="note-details__date">{note.displayDate}</p>
       </div>
-      
+
       <div className="note-details__divider"></div>
 
       <div className="note-details__content">
@@ -50,28 +51,31 @@ export default function NoteDetails({
         )}
       </div>
 
-      {showActions && (
-        <div className="note-details__actions">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onEdit();
-            }}
-            className="note-details__edit-button"
-          >
-            Edit
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete();
-            }}
-            className="note-details__delete-button"
-          >
-            Delete
-          </button>
-        </div>
-      )}
+      <div className="note-details__action-buttons">
+        {showActions && (
+          <div className="note-details__actions">
+            <img
+              src={editNote}
+              alt="Edit"
+              className="note-details__action-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(note);
+              }}
+            />
+
+            <img
+              src={deleteNote}
+              alt="Delete"
+              className="note-details__action-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(note);
+              }}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

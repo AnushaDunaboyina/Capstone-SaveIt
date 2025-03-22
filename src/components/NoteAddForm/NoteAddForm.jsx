@@ -7,15 +7,15 @@ export default function NoteAddForm() {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState(""); // Main content
+  const [content, setContent] = useState(""); 
   const [tags, setTags] = useState("");
-  const [color, setColor] = useState("#ffffff"); // Default color
+  const [color, setColor] = useState("#ffffff"); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [bulletMode, setBulletMode] = useState(false); // Toggle for bullet points
-  const [aiLoading, setAiLoading] = useState(false); // AI processing loading state
-  const [originalContent, setOriginalContent] = useState(""); // To store the original content before AI processing
-  const [showSuggestion, setShowSuggestion] = useState(false); // Whether to show Accept/Discard options
+  const [bulletMode, setBulletMode] = useState(false); 
+  const [aiLoading, setAiLoading] = useState(false); 
+  const [originalContent, setOriginalContent] = useState(""); 
+  const [showSuggestion, setShowSuggestion] = useState(false); 
 
   // Handle AI feature (grammar correction or summarization)
   const handleAIProcess = async (task) => {
@@ -28,17 +28,17 @@ export default function NoteAddForm() {
       setAiLoading(true);
       setError(null);
 
-      setOriginalContent(content); // Store the original content before AI processing
+      setOriginalContent(content); 
 
       const response = await axios.post(`${API_URL}/api/notes/process-ai`, {
         content: content.trim(),
-        task, // Either "grammar_correction" or "summarize"
+        task, 
       });
 
-      const bestSuggestion = response.data.processedContent; // The best suggestion from AI
-      setContent(bestSuggestion); // Temporarily display the suggestion
-      setShowSuggestion(true); // Show the Accept/Discard buttons
-      // alert(`AI processing complete. Here's the suggestion.`);
+      const bestSuggestion = response.data.processedContent; 
+      setContent(bestSuggestion); 
+      setShowSuggestion(true); 
+      
     } catch (err) {
       console.error("Error with AI processing:", err);
       setError("Failed to process content with AI. Please try again.");
@@ -49,15 +49,13 @@ export default function NoteAddForm() {
 
   // Accept the AI suggestion
   const handleAcceptSuggestion = () => {
-    setShowSuggestion(false); // Hide the Accept/Discard buttons
-    
+    setShowSuggestion(false); 
   };
 
   // Discard the AI suggestion and revert to the original content
   const handleDiscardSuggestion = () => {
-    setContent(originalContent); // Revert to the original content
-    setShowSuggestion(false); // Hide the Accept/Discard buttons
-    
+    setContent(originalContent); 
+    setShowSuggestion(false); 
   };
 
   // Handle content changes and apply bullet points if enabled
@@ -68,8 +66,8 @@ export default function NoteAddForm() {
   // Handle Enter key for bullet points if bullet mode is active
   const handleKeyDown = (e) => {
     if (bulletMode && e.key === "Enter") {
-      e.preventDefault(); // Prevent default newline behavior
-      setContent((prevContent) => `${prevContent}\n• `); // Add a bullet point
+      e.preventDefault(); 
+      setContent((prevContent) => `${prevContent}\n• `); 
     }
   };
 
@@ -92,7 +90,6 @@ export default function NoteAddForm() {
         color, // Include color
       });
 
-      alert("Note added successfully!");
       navigate("/notes");
     } catch (err) {
       console.error("Error adding note:", err);
@@ -127,7 +124,6 @@ export default function NoteAddForm() {
           {bulletMode ? "Disable Bullet Points" : "Enable Bullet Points"}
         </button>
       </div>
-      
 
       {/* Title Field */}
       <div>
@@ -138,8 +134,8 @@ export default function NoteAddForm() {
           onChange={(e) => setTitle(e.target.value)}
           required
           style={{
-            backgroundColor: color, 
-            color: "#333", 
+            backgroundColor: color,
+            color: "#333",
             padding: "8px",
             borderRadius: "4px",
           }}
@@ -158,8 +154,8 @@ export default function NoteAddForm() {
           cols="50"
           required
           style={{
-            backgroundColor: color, 
-            color: "#333", 
+            backgroundColor: color,
+            color: "#333",
             padding: "8px",
             borderRadius: "4px",
           }}
