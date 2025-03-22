@@ -1,12 +1,10 @@
-@use "../../styles/partials/variables" as *;
-
-.link-edit {
-  margin: 4rem 10rem;
+.document-edit {
+  margin: 4rem 18rem;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 
   &__back {
     display: flex;
@@ -27,7 +25,7 @@
 
   &__title {
     font-size: 28px;
-    
+
     margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
@@ -44,8 +42,7 @@
   &__field {
     margin-bottom: 20px;
 
-    .link-edit__input,
-    .link-edit__textarea {
+    .document-edit__input {
       width: 100%;
       padding: 10px;
       border: 2px solid #ddd;
@@ -58,10 +55,6 @@
       &:focus {
         border-color: #6ab7ff;
       }
-    }
-
-    .link-edit__textarea {
-      min-height: 100px;
     }
   }
 
@@ -83,7 +76,7 @@
       }
     }
 
-    .link-edit__save-button {
+    .document-edit__save-button {
       background-color: #6ab7ff;
       color: #fff;
 
@@ -98,7 +91,7 @@
       }
     }
 
-    .link-edit__cancel-button {
+    .document-edit__cancel-button {
       background-color: #ff6b6b;
       color: #fff;
 

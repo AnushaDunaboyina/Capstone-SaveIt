@@ -25,19 +25,20 @@ export default function DocumentList() {
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState("desc");
 
+  const fetchDocuments = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/documents`);
+      setDocuments(response.data);
+      setSearchResults(response.data);
+    } catch (err) {
+      setError("Failed to fetch documents.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchDocuments = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/documents`);
-        setDocuments(response.data);
-        setSearchResults(response.data);
-      } catch (err) {
-        setError("Failed to fetch documents.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchDocuments();
+    fetchDocuments(); // Call `fetchDocuments` within the `useEffect`
   }, []);
 
   const handleEditDocument = (document) => {
@@ -148,9 +149,7 @@ export default function DocumentList() {
           </div>
 
           <div className="documents-list__upload">
-            <DocumentUploadForm
-              onUploadSuccess={() => setSearchResults([...documents])}
-            />
+            <DocumentUploadForm onUploadSuccess={fetchDocuments} />
           </div>
         </div>
 
@@ -180,7 +179,7 @@ export default function DocumentList() {
             displayDocuments.map((document) => (
               <li key={document.id} className="documents-list__item">
                 <p className="documents-list__filename">
-                  Filename: {document.filename}
+                  {document.filename}
                 </p>
                 {document.tags?.length > 0 && (
                   <ul className="documents-list__tags-list">
@@ -196,7 +195,7 @@ export default function DocumentList() {
                   </ul>
                 )}
 
-                <div>
+                <div className="documents-list__actions">
                   <a
                     className="documents-list__file-preview"
                     href={`http://localhost:5050${document.filepath}`}
@@ -205,18 +204,20 @@ export default function DocumentList() {
                   >
                     Preview
                   </a>
-                  <img
-                    className="documents-list__icon documents-list__icon--edit"
-                    src={editDocument}
-                    alt="Edit"
-                    onClick={() => handleEditDocument(document)}
-                  />
-                  <img
-                    className="documents-list__icon documents-list__icon--delete"
-                    src={deleteDocument}
-                    alt="Delete"
-                    onClick={() => handleDeleteClick(document)}
-                  />
+                  <div className="documents-list__action-icons">
+                    <img
+                      className="documents-list__icon documents-list__icon--edit"
+                      src={editDocument}
+                      alt="Edit"
+                      onClick={() => handleEditDocument(document)}
+                    />
+                    <img
+                      className="documents-list__icon documents-list__icon--delete"
+                      src={deleteDocument}
+                      alt="Delete"
+                      onClick={() => handleDeleteClick(document)}
+                    />
+                  </div>
                 </div>
               </li>
             ))

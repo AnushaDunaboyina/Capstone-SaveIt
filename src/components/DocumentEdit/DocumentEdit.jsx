@@ -2,6 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
+import "./DocumentEdit.scss";
+
+import back from "../../assets/icons/back3.png";
 
 export default function DocumentEdit({
   onCancelEditDocument,
@@ -78,39 +81,63 @@ export default function DocumentEdit({
 
   return (
     <div className="document-edit">
-      <div onClick={() => navigate("/documents")}>
-        <button>Back</button>
+      {/* Back Button */}
+      <div
+        className="document-edit__back"
+        onClick={() => navigate("/documents")}
+      >
+        <img
+          src={back}
+          alt="Back"
+          className="document-edit__back-icon"
+          title="Go Back"
+        />
       </div>
-      <h2>Edit Document</h2>
 
-      {error && <p className="error-message">{error}</p>}
+      <h2 className="document-edit__title">Edit Document</h2>
 
-      <div>
-        <label>Filename:</label>
+      {error && <p className="document-edit__error-message">{error}</p>}
+
+      <div className="document-edit__field">
         <input
+          title="Filename"
           type="text"
+          className="document-edit__input"
           value={filename}
           onChange={(e) => setFilename(e.target.value)}
           required
+          placeholder="Enter filename..."
         />
       </div>
 
-      <div>
-        <label>Tags (comma-separated):</label>
+      <div className="document-edit__field">
         <input
+          title="Tags: comma separated"
           type="text"
+          className="document-edit__input"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
           required
+          placeholder="Enter tags (comma-separated)..."
         />
       </div>
 
-      <button onClick={handleSave} disabled={loading}>
-        {loading ? "Saving..." : "Save"}
-      </button>
-      <button onClick={() => navigate("/documents")} disabled={loading}>
-        Cancel
-      </button>
+      <div className="document-edit__actions">
+        <button
+          className="document-edit__save-button"
+          onClick={handleSave}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save"}
+        </button>
+        <button
+          className="document-edit__cancel-button"
+          onClick={() => navigate("/documents")}
+          disabled={loading}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }

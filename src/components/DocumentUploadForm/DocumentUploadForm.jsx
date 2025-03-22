@@ -67,7 +67,7 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
         onUploadSuccess();
       }
 
-      // setShowForm(false);
+      setShowForm(false);
     } catch (error) {
       setError("Failed to upload the document. Please try again.");
       setSuccess(false);
@@ -78,7 +78,7 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
 
   return (
     <div className="document-upload-form">
-      {/* Show the upload icon initially */}
+      
       {!showForm && (
         <img
           src={upload}
@@ -88,11 +88,11 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
         />
       )}
 
-      {/* Modal Form */}
+
       {showForm && (
         <div className="document-upload-form__modal-overlay">
           <div className="document-upload-form__modal-content">
-            {/* Go Back Button */}
+      
             <img
               src={goBack}
               alt="Go Back"
@@ -104,7 +104,7 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
               className="document-upload-form__form"
             >
               <div className="document-upload-form__form-group">
-                {/* Custom "Choose File" button */}
+        
                 <label className="document-upload-form__file-label" htmlFor="uploadFile">
                   Choose File
                 </label>
@@ -114,7 +114,7 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
                   className="document-upload-form__file-input"
                   onChange={handleFileChange}
                 />
-                {/* Display chosen file name below the button */}
+             
                 {file && <p className="document-upload-form__file-name">{filename}</p>}
               </div>
 
@@ -149,15 +149,6 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
               >
                 {loading ? "Uploading..." : "Upload"}
               </button>
-
-              {error && (
-                <p className="document-upload-form__error-message">{error}</p>
-              )}
-              {success && (
-                <p className="document-upload-form__success-message">
-                  File uploaded successfully!
-                </p>
-              )}
             </form>
           </div>
         </div>
