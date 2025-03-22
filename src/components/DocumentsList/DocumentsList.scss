@@ -1,23 +1,50 @@
-.document-tags,
-.link-tags {
-  margin-top: 8px;
+@use "../../styles/partials/variables" as *;
+
+.documents-list {
+  &__header {
+    border: 2px solid $cloud;
+    background-color: rgb(253, 253, 235);
+    padding: 0 32px;
+  }
+
+  &__toolbar {
+    padding: 32px 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: first baseline;
+  }
+
+  &__search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+
+    &-input {
+      width: 100%;
+      padding-right: 35px;
+      padding-left: 10px;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 16px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    &-icon {
+      position: absolute;
+      right: 10px;
+      top: 45%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #888;
+      pointer-events: none;
+    }
+  }
+
+  &__sort-icon {
+    height: 18px;
+    width : 18px;
+  }
 }
 
-.document-tags ul,
-.link-tags ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex; /* Use flexbox to display tags inline */
-  gap: 8px; /* Add spacing between tags */
-}
-
-.document-tag,
-.link-tag {
-  background-color: #eef;
-  color: #334;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  display: inline-block; /* Ensure each tag stays inline */
-}

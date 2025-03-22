@@ -1,153 +1,139 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../config";
-import DocumentUploadForm from "../DocumentUploadForm/DocumentUploadForm"; // Import the upload form component
+import DocumentUploadForm from "../DocumentUploadForm/DocumentUploadForm";
 import SearchBar from "../SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import "./DocumentsList.scss";
 
-import sortby from "../../assets/icons/sort.png";
+import sort from "../../assets/icons/sort.png";
 import addDocument from "../../assets/icons/add-file.png";
 import editDocument from "../../assets/icons/edit1.png";
 import deleteDocument from "../../assets/icons/delete.png";
 
 export default function DocumentList() {
   const navigate = useNavigate();
-
   const [documents, setDocuments] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [viewAll, setViewAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [deleteDocument, setDeleteDocument] = useState(null);
+  const [deleteDoc, setDeleteDoc] = useState(null);
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState("desc");
 
-  // Function to fetch documents
-  const fetchDocuments = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/documents`);
-      setDocuments(response.data);
-      setSearchResults(response.data);
-    } catch (err) {
-      setError("Failed to fetch documents.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch documents when the component is mounted
   useEffect(() => {
+    const fetchDocuments = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/documents`);
+        setDocuments(response.data);
+        setSearchResults(response.data);
+      } catch (err) {
+        setError("Failed to fetch documents.");
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchDocuments();
   }, []);
 
-  // Handle Edit document
   const handleEditDocument = (document) => {
     navigate(`/documents/${document.id}/edit`);
   };
 
-  // Handle Search Query
-  const handleSearch = (query) => {
-    if (query.trim() === "") {
-      setSearchResults(documents); // Reset to all documents if the query is empty
-    } else {
-      const filtered = documents.filter((doc) => {
-        const filenameMatches = doc.filename
-          .toLowerCase()
-          .includes(query.toLowerCase());
-
-        const tags =
-          typeof doc.tags === "string"
-            ? doc.tags
-            : JSON.stringify(doc.tags || []);
-        const tagsMatches = tags.toLowerCase().includes(query.toLowerCase());
-
-        return filenameMatches || tagsMatches;
-      });
-
-      setSearchResults(filtered); // Update the search results
-    }
-  };
-
-  // Function to Delete Document
   const handleDeleteClick = (document) => {
-    setDeleteDocument(document); // Stor the document to be deleted
-    setShowModal(true); // Show the modal
+    setDeleteDoc(document);
+    setShowModal(true);
   };
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await axios.delete(
-        `${API_URL}/api/documents/${deleteDocument.id}`
-      );
-      alert("Document deleted successfully!");
-      setShowModal(false); // Close the modal
-      fetchDocuments(); // refresh the list
-      console.log(response.data);
+      await axios.delete(`${API_URL}/api/documents/${deleteDoc.id}`);
+      setShowModal(false);
+      setDocuments(documents.filter((doc) => doc.id !== deleteDoc.id));
+      setSearchResults(searchResults.filter((doc) => doc.id !== deleteDoc.id));
     } catch (err) {
       console.error("Error deleting document:", err);
       alert("Failed to delete the document.");
     }
   };
 
-  if (loading) {
-    return <p>Loading documents...</p>;
-  }
-  if (error) {
-    return <p className="error">{error}</p>;
-  }
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setSearchResults(
+      query.trim()
+        ? documents.filter(
+            (doc) =>
+              doc.filename.toLowerCase().includes(query.toLowerCase()) ||
+              JSON.stringify(doc.tags || [])
+                .toLowerCase()
+                .includes(query.toLowerCase())
+          )
+        : documents
+    );
+  };
 
-  // Sorting the documents
+  if (loading) return <p>Loading documents...</p>;
+  if (error) return <p className="error">{error}</p>;
+
   const sortedDocuments = [...searchResults].sort((a, b) => {
-    let comparison = 0;
-    if (sortBy === "createdAt") {
-      const dateA = new Date(a.createdAt);
-      const dateB = new Date(b.createdAt);
-      comparison = dateB - dateA; // Sorting in descending order initially
-    } else if (sortBy === "filename") {
-      comparison = a.filename.localeCompare(b.filename);
-    }
-
-    // Apply sort order (ascending or descending)
+    let comparison =
+      sortBy === "filename"
+        ? a.filename.localeCompare(b.filename)
+        : new Date(b.createdAt) - new Date(a.createdAt);
     return sortOrder === "asc" ? comparison : -comparison;
   });
 
   const displayDocuments = viewAll
     ? sortedDocuments
     : sortedDocuments.slice(0, 3);
-    
 
   return (
     <div className="documents-list">
-      <div>
-        <SearchBar
-          onSearch={handleSearch}
-          placeholder="Search by filename or tags..."
-        />
+      <div className="documents-list__header">
+        <div className="documents-list__toolbar">
+          <div className="documents-list__search-bar">
+            <input
+              type="text"
+              className="documents-list__search-bar-input"
+              placeholder="Search by filename or tags..."
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+            <span className="documents-list__search-bar-icon">🔍</span>
+          </div>
 
-         <div className="sorting-controls">
-          {/* here we should give sort image */}
-          <select
-            id="sortBy"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="createdAt">Date</option>
-            <option value="filename">Filename</option>
-          </select>
+          <div className="documents-list__sorting-controls">
+            <img className="documents-list__sort-icon" src={sort} alt="Sort" />
+            <select
+              className="documents-list__sort-by"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="createdAt">Date</option>
+              <option value="filename">Filename</option>
+            </select>
+            <select
+              className="documents-list__sort-order"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="desc">Desc</option>
+              <option value="asc">Asc</option>
+            </select>
+          </div>
 
-          <select
-            id="sortOrder"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            <option value="desc">Desc</option>
-            <option value="asc">Asc</option>
-          </select>
+          <div className="documents-list__upload">
+            <DocumentUploadForm
+              onUploadSuccess={() => setSearchResults([...documents])}
+            />
+          </div>
         </div>
-       
+
+        <div className="documents-list__header-divider"></div>
         <div>
           {!viewAll ? (
             <button onClick={() => setViewAll(true)}>View All</button>
@@ -157,52 +143,47 @@ export default function DocumentList() {
         </div>
       </div>
 
-      <div>
-        <DocumentUploadForm onUploadSuccess={fetchDocuments} />
-      </div>
-      <div>
-       
-        <ul>
+      <div className="documents-list__items-container">
+        <ul className="documents-list__items">
           {displayDocuments.length > 0 ? (
             displayDocuments.map((document) => (
-              <li key={document.id}>
-                <p>Filename: {document.filename}</p>
-
-                {document.tags && document.tags.length > 0 && (
-                  <div className="document-tags">
-                    {/* <p>Tags:</p> */}
-                    <ul>
-                      {Array.isArray(document.tags)
-                        ? document.tags.map((tag, index) => (
-                            <li key={index} className="document-tag">
-                              {tag}
-                            </li>
-                          ))
-                        : typeof document.tags === "string" &&
-                          document.tags.startsWith("[")
-                        ? JSON.parse(document.tags).map((tag, index) => (
-                            <li key={index} className="document-tag">
-                              {tag}
-                            </li>
-                          ))
-                        : "No tags"}
-                    </ul>
-                  </div>
+              <li key={document.id} className="documents-list__item">
+                <p className="documents-list__filename">
+                  Filename: {document.filename}
+                </p>
+                {document.tags?.length > 0 && (
+                  <ul className="documents-list__tags-list">
+                    {JSON.parse(
+                      typeof document.tags === "string"
+                        ? document.tags
+                        : JSON.stringify(document.tags)
+                    ).map((tag, index) => (
+                      <li key={index} className="documents-list__tag-item">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
                 )}
                 <a
+                  className="documents-list__file-preview"
                   href={`http://localhost:5050${document.filepath}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Preview
                 </a>
-                <button onClick={() => handleEditDocument(document)}>
-                  Edit
-                </button>
-
-                <button onClick={() => handleDeleteClick(document)}>
-                  Delete
-                </button>
+                <img
+                  className="documents-list__icon documents-list__icon--edit"
+                  src={editDocument}
+                  alt="Edit"
+                  onClick={() => handleEditDocument(document)}
+                />
+                <img
+                  className="documents-list__icon documents-list__icon--delete"
+                  src={deleteDocument}
+                  alt="Delete"
+                  onClick={() => handleDeleteClick(document)}
+                />
               </li>
             ))
           ) : (
@@ -213,7 +194,7 @@ export default function DocumentList() {
           show={showModal}
           onClose={() => setShowModal(false)}
           onConfirm={handleConfirmDelete}
-          itemName={deleteDocument?.filename}
+          itemName={deleteDoc?.filename}
         />
       </div>
     </div>

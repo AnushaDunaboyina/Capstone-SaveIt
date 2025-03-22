@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import NotesList from "../../components/NotesList/NotesList"; // Reusable NotesList Component
 import { API_URL } from "../../config";
