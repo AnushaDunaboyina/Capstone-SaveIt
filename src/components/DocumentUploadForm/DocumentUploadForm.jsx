@@ -66,6 +66,8 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
       if (typeof onUploadSuccess === "function") {
         onUploadSuccess();
       }
+
+      // setShowForm(false);
     } catch (error) {
       setError("Failed to upload the document. Please try again.");
       setSuccess(false);
