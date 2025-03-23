@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.scss";
-import logo from "../../assets/logos/saveit-logo1.png";
+import logo from "../../assets/logos/saveit-logo7.png";
 import calendar from "../../assets/icons/calendar.png";
 
 export default function Header() {

@@ -62,6 +62,7 @@
   &__sort-buttons {
     display: flex;
     gap: 0.125rem;
+    
   }
 
   &__sort-by,
@@ -75,6 +76,7 @@
     border-radius: 0.5rem;
     font-size: 1rem;
     outline: none;
+    cursor: pointer;
   }
 
   &__sort-option {

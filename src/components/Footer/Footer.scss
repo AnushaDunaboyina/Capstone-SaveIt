@@ -8,7 +8,8 @@
 
   &__container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     gap: 1.25rem;
   }
@@ -22,21 +23,21 @@
     &-link {
       display: inline-block;
       transition: transform 0.3s ease, filter 0.3s ease;
+
+      &:hover {
+        transform: scale(1.2);
+        filter: brightness(1.2);
+      }
+
+      &:focus {
+        outline: 0.125rem solid $blue-outline;
+        outline-offset: 0.125rem;
+      }
     }
 
     &-icon {
       width: 2rem;
       height: 2rem;
-    }
-
-    &:hover {
-      transform: scale(1.2);
-      filter: brightness(1.2);
-    }
-
-    &:focus {
-      outline: 0.125rem solid $blue-outline;
-      outline-offset: 0.125rem;
     }
   }
 

@@ -24,6 +24,7 @@ export default function NoteDetails({
     <div
       className={`note-details ${isExpanded ? "note-details--expanded" : ""}`}
       style={{ backgroundColor: note.color }}
+      title="Click to view"
       onClick={toggleView}
     >
       <div className="note-details__header">

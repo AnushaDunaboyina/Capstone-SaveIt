@@ -63,6 +63,7 @@
   &__sort-buttons {
     display: flex;
     gap: 0.125rem;
+    
   }
 
   &__sort-by,
@@ -76,14 +77,22 @@
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
+    cursor: pointer;
   }
 
   &__sort-option {
     font-family: $font-family-secondary;
+    cursor: pointer;
   }
 
   &__add-note-icon {
     width: 2.625rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &__view-all {
@@ -105,5 +114,12 @@
     font-size: 1rem;
     outline: none;
     font-family: $font-family-secondary;
+    cursor: pointer;
+
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
