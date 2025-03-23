@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
-import NotesList from "../../components/NotesList/NotesList"; // Reusable NotesList Component
+import NotesList from "../../components/NotesList/NotesList"; 
 import { API_URL } from "../../config";
 import axios from "axios";
 import "./NotesPage.scss";
@@ -17,7 +17,6 @@ export default function NotesPage() {
   const [deleteNote, setDeleteNote] = useState(null);
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState("desc");
-  const [selectedNote, setSelectedNote] = useState(null);
 
   const navigate = useNavigate();
 

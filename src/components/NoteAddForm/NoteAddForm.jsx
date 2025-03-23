@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 import Quill from "quill";
-import "quill/dist/quill.snow.css"; // Quill's default styling
+import "quill/dist/quill.snow.css";
 import "./NoteAddForm.scss";
 import backButton from "../../assets/icons/back3.png";
 import accept from "../../assets/icons/Accept.png";
@@ -23,7 +23,7 @@ export default function NoteAddForm() {
   const [showSuggestion, setShowSuggestion] = useState(false);
 
   const editorRef = useRef(null);
-  let quillInstance = useRef(null); // Reference for the Quill instance
+  let quillInstance = useRef(null); 
 
   // Initialize Quill editor
   useEffect(() => {
@@ -44,13 +44,13 @@ export default function NoteAddForm() {
       quillInstance.current.on("text-change", () => {
         const editorContent = quillInstance.current.root.innerHTML;
 
-        setContent(editorContent); // Update content state dynamically
+        setContent(editorContent); 
       });
     }
 
     return () => {
       if (quillInstance.current) {
-        quillInstance.current.off("text-change"); // Remove event listeners
+        quillInstance.current.off("text-change"); 
       }
     };
   }, []);
@@ -66,7 +66,6 @@ export default function NoteAddForm() {
     try {
       setAiLoading(true);
       setError(null);
-
       setOriginalContent(content);
 
       // Send API request
@@ -78,9 +77,9 @@ export default function NoteAddForm() {
       // Apply AI suggestion
       const bestSuggestion = response.data.processedContent.trim();
       if (bestSuggestion !== content.trim()) {
-        quillInstance.current.root.innerHTML = bestSuggestion; // Update editor
-        setContent(bestSuggestion); // Sync with state
-        setShowSuggestion(true); // Show Accept/Discard buttons
+        quillInstance.current.root.innerHTML = bestSuggestion; 
+        setContent(bestSuggestion); 
+        setShowSuggestion(true); 
       } else {
         console.warn("No changes detected from AI.");
         setError("No changes detected. The content might already be correct.");
@@ -95,7 +94,7 @@ export default function NoteAddForm() {
 
   // Accept the AI suggestion
   const handleAcceptSuggestion = () => {
-    setShowSuggestion(false); // Hide suggestion options
+    setShowSuggestion(false); 
   };
 
   // Discard the AI suggestion and revert to original content
@@ -105,9 +104,9 @@ export default function NoteAddForm() {
       return;
     }
 
-    quillInstance.current.root.innerHTML = originalContent; // Restore editor content
-    setContent(originalContent); // Sync state
-    setShowSuggestion(false); // Hide Accept/Discard buttons
+    quillInstance.current.root.innerHTML = originalContent; 
+    setContent(originalContent); 
+    setShowSuggestion(false); 
   };
 
   // Save the note
@@ -124,7 +123,7 @@ export default function NoteAddForm() {
       setError(null);
 
       // Extract plain text from Quill editor
-      const plainTextContent = quillInstance.current.getText().trim(); // Get text without HTML tags
+      const plainTextContent = quillInstance.current.getText().trim(); 
 
       // Prepare tags for saving
       const updatedTags = tags.split(",").map((tag) => tag.trim());
@@ -132,7 +131,7 @@ export default function NoteAddForm() {
       // Send data to the backend
       const response = await axios.post(`${API_URL}/api/notes`, {
         title: title.trim(),
-        content: plainTextContent, // Send plain text instead of HTML
+        content: plainTextContent, 
         tags: updatedTags,
         color,
       });
@@ -166,7 +165,6 @@ export default function NoteAddForm() {
 
       {error && <p className="note-add__error-message">{error}</p>}
 
-      {/* Title Field */}
 
       <div className="note-add__title-color-field">
         <div className="note-add__title-field">
@@ -179,12 +177,12 @@ export default function NoteAddForm() {
             required
             className="note-add__input"
             style={{
-              background: color, // Apply the selected color to the border
+              background: color, 
             }}
           />
         </div>
 
-        {/* Color Options */}
+       {/* Color Options  */}
         <div className="note-add__color-options">
           <div className="note-add__color-options-container">
             {[
@@ -219,7 +217,7 @@ export default function NoteAddForm() {
           ref={editorRef}
           className="note-add__quill-editor"
           style={{
-            background: color, // Apply the selected color to the editor border
+            background: color, 
           }}
         />
       </div>
@@ -234,7 +232,7 @@ export default function NoteAddForm() {
           required
           className="note-add__tags-input"
           style={{
-            background: color, // Apply the selected color to the border
+            background: color, 
           }}
         />
       </div>

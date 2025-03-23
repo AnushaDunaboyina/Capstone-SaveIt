@@ -3,23 +3,23 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../config";
 import Quill from "quill";
-import "quill/dist/quill.snow.css"; // Quill's default styling
+import "quill/dist/quill.snow.css";
 import "./NoteEdit.scss";
 import backButton from "../../assets/icons/back3.png";
 
 export default function NoteEditForm() {
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the ID from the URL
+  const { id } = useParams();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
-  const [color, setColor] = useState("#ffffff"); // Default color
+  const [color, setColor] = useState("#ffffff");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const editorRef = useRef(null);
-  let quillInstance = useRef(null); // Reference for the Quill instance
+  let quillInstance = useRef(null);
 
   useEffect(() => {
     const fetchNote = async () => {
@@ -27,10 +27,10 @@ export default function NoteEditForm() {
         const response = await axios.get(`${API_URL}/api/notes/${id}`);
         setTitle(response.data.title);
         setTags(response.data.tags.join(", "));
-        setColor(response.data.color || "#ffffff"); // Set color from response
+        setColor(response.data.color || "#ffffff");
 
         // Set the content in state
-        const noteContent = response.data.content || "<p></p>"; // Default to empty paragraph
+        const noteContent = response.data.content || "<p></p>";
         setContent(noteContent);
 
         // If Quill is already initialized, update the editor content
@@ -61,12 +61,12 @@ export default function NoteEditForm() {
         },
       });
 
-      quillInstance.current.root.innerHTML = content; // Set initial content
+      quillInstance.current.root.innerHTML = content;
 
       // Listen for content changes
       quillInstance.current.on("text-change", () => {
         const editorContent = quillInstance.current.root.innerHTML;
-        setContent(editorContent); // Update content dynamically
+        setContent(editorContent);
       });
     }
 
@@ -138,7 +138,7 @@ export default function NoteEditForm() {
             required
             className="note-edit__input"
             style={{
-              background: color, // Apply the selected color as the background
+              background: color,
             }}
           />
         </div>
@@ -164,7 +164,7 @@ export default function NoteEditForm() {
                 style={{
                   backgroundColor: colorOption,
                 }}
-                onClick={() => setColor(colorOption)} // Change color state
+                onClick={() => setColor(colorOption)}
                 title={`Color ${colorOption}`}
               ></div>
             ))}
@@ -177,7 +177,7 @@ export default function NoteEditForm() {
           ref={editorRef}
           className="note-edit__quill-editor"
           style={{
-            background: color, // Apply selected color to the editor
+            background: color,
           }}
         />
       </div>
@@ -191,7 +191,7 @@ export default function NoteEditForm() {
           required
           className="note-edit__tags-input"
           style={{
-            background: color, // Apply selected color to the background
+            background: color,
           }}
         />
       </div>

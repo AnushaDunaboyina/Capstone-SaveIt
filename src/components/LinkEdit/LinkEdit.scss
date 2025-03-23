@@ -2,21 +2,20 @@
 
 .link-edit {
   margin: 4rem 10rem;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  padding: 1.25rem;
+  background-color: $ghost-white;
+  border-radius: 0.938rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
 
   &__back {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     cursor: pointer;
 
     &-icon {
-      width: 30px;
-      height: 30px;
+      width: 1.875rem;
+      height: 1.875rem;
       transition: transform 0.2s ease;
 
       &:hover {
@@ -26,66 +25,66 @@
   }
 
   &__title {
-    font-size: 28px;
-    
-    margin-bottom: 20px;
+    font-size: 1.75rem;
+
+    margin-bottom: 1.25rem;
     text-align: center;
     font-weight: bold;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.031rem;
   }
 
   &__error-message {
-    color: #ff6b6b;
-    font-size: 14px;
+    color: $red-light;
+    font-size: 0.875rem;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 0.938rem;
   }
 
   &__field {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 
     .link-edit__input,
     .link-edit__textarea {
       width: 100%;
-      padding: 10px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 16px;
-      color: #333;
+      padding: 0.625rem;
+      border: 0.125rem solid #ddd;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: $gray;
       outline: none;
       transition: border-color 0.3s ease;
 
       &:focus {
-        border-color: #6ab7ff;
+        border-color: $blue-focus;
       }
     }
 
     .link-edit__textarea {
-      min-height: 100px;
+      min-height: 6.25rem;
     }
   }
 
   &__actions {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     justify-content: flex-end;
 
     button {
-      padding: 10px 20px;
+      padding: 0.625rem 1.25rem;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 0.5rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
 
       &:hover {
-        transform: translateY(-2px);
+        transform: translateY(-0.125rem);
       }
     }
 
     .link-edit__save-button {
-      background-color: #6ab7ff;
-      color: #fff;
+      background-color: $blue-focus;
+      color: $white;
 
       &:hover {
         background-color: #4a9fff;
@@ -99,8 +98,8 @@
     }
 
     .link-edit__cancel-button {
-      background-color: #ff6b6b;
-      color: #fff;
+      background-color: $red-light;
+      color: $white;
 
       &:hover {
         background-color: #ff4c4c;

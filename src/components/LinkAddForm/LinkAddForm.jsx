@@ -31,8 +31,8 @@ export default function LinkAddForm() {
       // Check if the user input URL already includes a protocol
       const fullUrl =
         url.trim().startsWith("http://") || url.trim().startsWith("https://")
-          ? url.trim() // Use the user-provided URL as is
-          : `${protocol}${url.trim()}`; // Otherwise, prepend the selected protocol
+          ? url.trim()
+          : `${protocol}${url.trim()}`;
 
       // Split and trim tags
       const updatedTags = tags.split(",").map((tag) => tag.trim());
@@ -41,14 +41,10 @@ export default function LinkAddForm() {
         title: title.trim(),
         url: fullUrl,
         description: description.trim(),
-
-        tags: updatedTags, // Send as an array
+        tags: updatedTags,
       });
 
-      console.log("Response from Server:", response.data);
-
-      // alert("Link added successfully!");
-      navigate("/links"); // Navigate back to links page
+      navigate("/links");
     } catch (err) {
       console.error("Error adding link:", err);
       if (err.response) {

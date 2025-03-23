@@ -7,7 +7,7 @@ import "./LinkEdit.scss";
 import back from "../../assets/icons/back3.png";
 
 export default function LinkEdit() {
-  const { id } = useParams(); // Extract the link ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -58,20 +58,11 @@ export default function LinkEdit() {
       const updatedTags = tags
         .split(",")
         .map((tag) => tag.trim())
-        .filter((tag) => tag); // Remove empty tags
-
+        .filter((tag) => tag);
       if (updatedTags.length === 0) {
         setError("Tags cannot be empty.");
         return;
       }
-
-      console.log("Payload being sent to server:", {
-        title: title.trim(),
-        url: url.trim(),
-        description: description.trim(),
-        thumbnail: thumbnail.trim(),
-        tags: updatedTags,
-      });
 
       const response = await axios.patch(`${API_URL}/api/links/${id}`, {
         title: title.trim(),
@@ -95,7 +86,7 @@ export default function LinkEdit() {
 
   return (
     <div className="link-edit">
-      {/* Back Button */}
+      
       <div className="link-edit__back" onClick={() => navigate("/links")}>
         <img
           src={back}

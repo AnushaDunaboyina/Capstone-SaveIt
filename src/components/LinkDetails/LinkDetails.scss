@@ -1,47 +1,47 @@
 @use "../../styles/partials/variables" as *;
 
 .link-details {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
+  border: 0.063rem solid #ddd;
+  border-radius: 0.625rem;
+  padding: 1rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
   transition: box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(119, 119, 119, 0.2);
+    box-shadow: 0 0.25rem 0.75rem rgba(119, 119, 119, 0.2);
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 
   &__title {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #333;
+    color: $gray;
     margin: 0;
   }
 
   &__date {
     font-size: 0.9rem;
-    color: #666;
+    color: $gray-light;
   }
 
   &__divider {
-    height: 1px;
+    height: 0.063rem;
     background-color: #ddd;
-    margin: 12px 0;
+    margin: 0.75rem 0;
   }
 
   &__description {
     font-size: 1rem;
-    color: #555;
-    margin-bottom: 12px;
-    font-size: 14px;
+    color: $gray-light;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
   }
 
   &__url {
@@ -57,10 +57,10 @@
 
   &__thumbnail-container {
     .link-details__thumbnail {
-      width: 340px;
-      height: 160px;
-      border-radius: 4px;
-      border: 1px solid #ddd;
+      width: 21.25rem;
+      height: 10rem;
+      border-radius: 0.25rem;
+      border: 0.063rem solid #ddd;
     }
   }
 
@@ -71,13 +71,13 @@
   }
 
   &__tags {
-    margin-top: 12px;
+    margin-top: 0.75rem;
     font-size: 0.9rem;
 
     &-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 0.5rem;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -87,10 +87,10 @@
   &__tag-item {
     background-color: #eaf7ff;
     color: #0073e6;
-    padding: 6px 12px;
-    border-radius: 12px;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.75rem;
     font-size: 0.85rem;
-    border: 1px solid #b3d7ff;
+    border: 0.063rem solid #b3d7ff;
     transition: background-color 0.3s ease, transform 0.2s ease;
 
     &:hover {
@@ -102,13 +102,13 @@
   &__actions {
     display: flex;
     justify-content: flex-end;
-    gap: 14px;
-    margin-top: 12px;
+    gap: 0.875rem;
+    margin-top: 0.75rem;
   }
 
   &__action-icon {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
 

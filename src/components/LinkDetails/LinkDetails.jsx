@@ -2,6 +2,7 @@ import React from "react";
 import "./LinkDetails.scss";
 import editLink from "../../assets/icons/edit1.png";
 import deleteLink from "../../assets/icons/delete.png";
+import { API_URL } from "../../config";
 
 export default function LinkDetails({ link, showActions, onEdit, onDelete }) {
   return (
@@ -30,14 +31,14 @@ export default function LinkDetails({ link, showActions, onEdit, onDelete }) {
           <img
             src={
               link.thumbnail ||
-              "http://localhost:5050/assets/default-thumbnail1.jpg"
+              `${API_URL}/assets/default-thumbnail1.jpg`
             }
             alt={`${link.title} Thumbnail`}
             className="link-details__thumbnail"
             onError={(e) => {
               if (!e.target.src.includes("default-thumbnail1.jpg")) {
                 e.target.src =
-                  "http://localhost:5050/assets/default-thumbnail1.jpg";
+                  `${API_URL}/assets/default-thumbnail1.jpg`;
               }
             }}
           />

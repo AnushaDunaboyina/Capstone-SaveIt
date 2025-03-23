@@ -2,29 +2,24 @@
 
 .homepage {
   &__hero {
-    background-image: url("../../assets/images/hero12.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    //   border: 1px solid red;
-    height: 540px;
+    height: 32rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 16px;
+    gap: 1rem;
 
     &-heading {
-      font-size: 54px;
+      font-size: 3.375rem;
       font-weight: 700;
-      color: #333;
+      color: $graphite;
     }
 
     &-description {
       font-size: 21px;
-      color: #555;
-      max-width: 800px;
+      color: $gray-light;
+      max-width: 50rem;
     }
   }
 
@@ -43,7 +38,7 @@
   }
 
   &__feature {
-    padding: 72px 102px;
+    padding: 4.5rem 6.375rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -58,43 +53,43 @@
       width: 40%;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 1.5rem;
       text-align: left;
     }
 
-    h3 {
-      font-size: 28px;
-      color: #333;
+    &-heading {
+      font-size: 1.75rem;
+      color: $gray;
       font-weight: 600;
     }
 
-    p {
+    &-description {
       font-size: 18px;
-      color: #555;
-      line-height: 1.6; // Add spacing for readability
+      color: $gray-light;
+      line-height: 1.6;
     }
 
-    &-cta {
-      padding: 10px 20px;
-      font-size: 16px;
+    &-button {
+      padding: 0.625rem 1.25rem;
+      font-size: 1rem;
       font-weight: bold;
-      color: #ffffff;
-      background-color: #ff6b6b; // Primary color for buttons
+      color: $white;
+      background-color: $red-light;
       border: none;
-      border-radius: 8px;
+      border-radius: 0.5rem;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
       width: fit-content;
-      text-align: center; // Ensure text stays centered
+      text-align: center;
 
       &:hover {
-        background-color: #fc5858; // Darker shade on hover
-        transform: translateY(-2px); // Subtle lift on hover
+        background-color: #fc5858;
+        transform: translateY(-0.125rem);
       }
 
       &:focus {
-        outline: 2px solid #fc5858; // Accessibility focus outline
-        outline-offset: 2px;
+        outline: 0.125rem solid #fc5858;
+        outline-offset: 0.125rem;
       }
     }
   }
