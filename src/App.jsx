@@ -13,9 +13,9 @@ import LinkAddForm from "./components/LinkAddForm/LinkAddForm";
 import LinkDetails from "./components/LinkDetails/LinkDetails";
 import LinkEdit from "./components/LinkEdit/LinkEdit";
 import DocumentsPage from "./pages/DocumentsPage/DocumentsPage";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import DocumentEdit from "./components/DocumentEdit/DocumentEdit";
 import DocumentDetails from "./components/DocumentDetails/DocumentDetails";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
         <Route path="/documents" element={<DocumentsPage />} />
         <Route path="/documents/:id" element={<DocumentDetails />} />
         <Route path="/documents/:id/edit" element={<DocumentEdit />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

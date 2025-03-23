@@ -1,4 +1,6 @@
 .calendar-page {
+  margin: 2rem;
+  margin-bottom: 8rem;
   padding: 1rem;
 }
 
@@ -16,7 +18,7 @@
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 columns for the week */
+  grid-template-columns: repeat(7, 1fr); 
   gap: 0.5rem;
 }
 
@@ -27,7 +29,7 @@
   position: relative;
   min-height: auto;
   cursor: text;
-  height: auto; /* Adjust height as needed */
+  height: auto; 
   overflow: visible; /* Enable vertical scrolling */
 }
 
@@ -49,9 +51,8 @@
 }
 
 .rbc-event {
-
-  margin-top: -16px; /* Moves the event slightly upwards */
-  line-height: 1; /* Ensures text fits nicely */
+  margin-top: -2px; /* Moves the event slightly upwards */
+  line-height: 1.5; /* Ensures text fits nicely */
   padding: 3px; /* Adds spacing for better readability */
 }
 
