@@ -1,18 +1,15 @@
-import { useParams, useNavigate } from "react-router-dom";
-import React, { useState, useEffect, useRef } from "react";
-import Quill from "quill";
-import "quill/dist/quill.snow.css"; // Import Quill's styling
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../config";
+import Quill from "quill";
+import "quill/dist/quill.snow.css"; // Quill's default styling
 import "./NoteEdit.scss";
+import backButton from "../../assets/icons/back3.png";
 
-import back from "../../assets/icons/back3.png";
-import accept from "../../assets/icons/Accept.png";
-import discard from "../../assets/icons/discard.png";
-
-export default function NoteEdit() {
-  const { id } = useParams(); // Extract the note ID from the URL
+export default function NoteEditForm() {
   const navigate = useNavigate();
+  const { id } = useParams(); // Get the ID from the URL
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -20,28 +17,25 @@ export default function NoteEdit() {
   const [color, setColor] = useState("#ffffff"); // Default color
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [aiLoading, setAiLoading] = useState(false);
-  const [originalContent, setOriginalContent] = useState("");
-  const [showSuggestion, setShowSuggestion] = useState(false);
 
-  const editorRef = useRef(null); // Reference for the editor container
+  const editorRef = useRef(null);
   let quillInstance = useRef(null); // Reference for the Quill instance
 
-  // Fetch existing note details
   useEffect(() => {
     const fetchNote = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/notes/${id}`);
         setTitle(response.data.title);
-        setContent(response.data.content);
-        setColor(response.data.color || "#ffffff");
-        setTags(
-          Array.isArray(response.data.tags) ? response.data.tags.join(", ") : ""
-        );
+        setTags(response.data.tags.join(", "));
+        setColor(response.data.color || "#ffffff"); // Set color from response
 
-        // Set content in Quill editor if it's already initialized
+        // Set the content in state
+        const noteContent = response.data.content || "<p></p>"; // Default to empty paragraph
+        setContent(noteContent);
+
+        // If Quill is already initialized, update the editor content
         if (quillInstance.current) {
-          quillInstance.current.root.innerHTML = response.data.content; // Set initial HTML content
+          quillInstance.current.root.innerHTML = noteContent;
         }
       } catch (err) {
         console.error("Error fetching note:", err);
@@ -67,10 +61,12 @@ export default function NoteEdit() {
         },
       });
 
-      // Listen for content changes and save plain text
+      quillInstance.current.root.innerHTML = content; // Set initial content
+
+      // Listen for content changes
       quillInstance.current.on("text-change", () => {
-        const plainTextContent = quillInstance.current.getText().trim(); // Extract plain text
-        setContent(plainTextContent); // Update state with plain text
+        const editorContent = quillInstance.current.root.innerHTML;
+        setContent(editorContent); // Update content dynamically
       });
     }
 
@@ -79,58 +75,8 @@ export default function NoteEdit() {
         quillInstance.current.off("text-change");
       }
     };
-  }, []);
+  }, [content]);
 
-  // Handle AI feature (Grammar Correction or Summarization)
-  const handleAIProcess = async (task) => {
-    if (!content.trim()) {
-      setError("Content cannot be empty for AI processing.");
-      return;
-    }
-
-    try {
-      setAiLoading(true);
-      setError(null);
-      setOriginalContent(content); // Save original content before AI processing
-
-      const response = await axios.post(`${API_URL}/api/notes/process-ai`, {
-        content: content.trim(),
-        task,
-      });
-
-      const bestSuggestion = response.data.processedContent.trim();
-      if (bestSuggestion !== content.trim()) {
-        quillInstance.current.root.innerHTML = bestSuggestion; // Update editor content
-        setContent(bestSuggestion); // Sync state
-        setShowSuggestion(true); // Show Accept/Discard buttons
-      } else {
-        setError("No changes detected. The content might already be correct.");
-      }
-    } catch (err) {
-      setError("Failed to process content with AI. Please try again.");
-    } finally {
-      setAiLoading(false);
-    }
-  };
-
-  // Accept the AI suggestion
-  const handleAcceptSuggestion = () => {
-    setShowSuggestion(false); // Hide Accept/Discard buttons
-  };
-
-  // Discard the AI suggestion and revert to original content
-  const handleDiscardSuggestion = () => {
-    if (!originalContent) {
-      setError("No original content to restore.");
-      return;
-    }
-
-    quillInstance.current.root.innerHTML = originalContent; // Restore original content in editor
-    setContent(originalContent); // Sync state
-    setShowSuggestion(false); // Hide Accept/Discard buttons
-  };
-
-  // Save the edited note
   const handleSave = async () => {
     if (!title.trim() || !content.trim() || !tags.trim()) {
       setError("All fields must be filled.");
@@ -141,23 +87,22 @@ export default function NoteEdit() {
       setLoading(true);
       setError(null);
 
-      const plainTextContent = quillInstance.current.getText().trim(); // Get plain text content
-      const updatedTags = tags
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter((tag) => tag);
+      // Extract plain text from the editor
+      const plainTextContent = quillInstance.current.getText().trim();
+      const updatedTags = tags.split(",").map((tag) => tag.trim());
 
-      const payload = {
+      // Update the note in the backend
+      await axios.patch(`${API_URL}/api/notes/${id}`, {
         title: title.trim(),
-        content: plainTextContent, // Save plain text to the backend
-        color: color.trim(),
+        content: plainTextContent,
         tags: updatedTags,
-      };
+        color,
+      });
 
-      await axios.patch(`${API_URL}/api/notes/${id}`, payload);
       navigate("/notes");
     } catch (err) {
-      setError("Failed to update the note. Please try again.");
+      console.error("Error saving note:", err);
+      setError("Failed to save the note. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -165,10 +110,14 @@ export default function NoteEdit() {
 
   return (
     <div className="note-edit">
-      {/* Back Button */}
-      <div className="note-edit__back" onClick={() => navigate("/notes")}>
+      <div
+        className="note-edit__back"
+        onClick={() => {
+          navigate("/notes");
+        }}
+      >
         <img
-          src={back}
+          src={backButton}
           alt="Back button icon"
           className="note-edit__back-icon"
           title="Go back"
@@ -187,80 +136,64 @@ export default function NoteEdit() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className="note-edit__input"
             style={{
-              backgroundColor: color,
+              background: color, // Apply the selected color as the background
             }}
           />
         </div>
 
-        <div className="note-add__color-picker">
-          <input
-            className="note-add__color-picker-input"
-            title="Pick a color"
-            type="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-          />
+        {/* Color Options */}
+        <div className="note-edit__color-options">
+          <div className="note-edit__color-options-container">
+            {[
+              "#ffe5e5", // Soft pink
+              "#fff5e6", // Soft peach
+              "#e6ffe6", // Soft green
+              "#f5f5f5", // Very light gray
+              "#e6f7ff", // Soft blue
+              "#f9e6ff", // Soft lavender
+            ].map((colorOption) => (
+              <div
+                key={colorOption}
+                className={`note-edit__color-option ${
+                  color === colorOption
+                    ? "note-edit__color-option--selected"
+                    : ""
+                }`}
+                style={{
+                  backgroundColor: colorOption,
+                }}
+                onClick={() => setColor(colorOption)} // Change color state
+                title={`Color ${colorOption}`}
+              ></div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Quill Editor */}
-      <div>
+      <div className="note-edit__content-field">
         <div
           ref={editorRef}
+          className="note-edit__quill-editor"
           style={{
-            height: "300px",
-            backgroundColor: color,
+            background: color, // Apply selected color to the editor
           }}
-        ></div>
+        />
       </div>
 
       <div className="note-edit__tags">
         <input
-          title="tags: comma seperated"
           type="text"
           value={tags}
+          placeholder="Tags: comma-separated.."
           onChange={(e) => setTags(e.target.value)}
           required
           className="note-edit__tags-input"
+          style={{
+            background: color, // Apply selected color to the background
+          }}
         />
-      </div>
-
-      {/* AI Tools */}
-      <div className="note-edit__ai-tools">
-        <button
-          onClick={() => handleAIProcess("grammar_correction")}
-          disabled={aiLoading || !content}
-          className="note-edit__ai-button"
-        >
-          {aiLoading ? "Processing Grammar..." : "Correct Grammar"}
-        </button>
-        <button
-          onClick={() => handleAIProcess("summarize")}
-          disabled={aiLoading || !content}
-          className="note-edit__ai-button"
-        >
-          {aiLoading ? "Summarizing..." : "Summarize"}
-        </button>
-
-        {showSuggestion && (
-          <div className="note-edit__suggestions">
-            <img
-              src={accept}
-              alt="Accept Suggestion"
-              title="Accept Suggestion"
-              className="note-edit__suggestion-icon"
-              onClick={handleAcceptSuggestion}
-            />
-            <img
-              src={discard}
-              alt="Discard Suggestion"
-              title="Discard Suggestion"
-              className="note-edit__suggestion-icon"
-              onClick={handleDiscardSuggestion}
-            />
-          </div>
-        )}
       </div>
 
       <div className="note-edit__actions">
@@ -272,7 +205,9 @@ export default function NoteEdit() {
           {loading ? "Saving..." : "Save"}
         </button>
         <button
-          onClick={() => navigate("/notes")}
+          onClick={() => {
+            navigate("/notes");
+          }}
           disabled={loading}
           className="note-edit__cancel-button"
         >

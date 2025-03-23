@@ -151,7 +151,6 @@ export default function NoteAddForm() {
       <div
         className="note-add__back"
         onClick={() => {
-          console.log("Navigating back to /notes.");
           navigate("/notes");
         }}
       >
@@ -175,48 +174,73 @@ export default function NoteAddForm() {
             type="text"
             title="Title"
             value={title}
-            onChange={(e) => {
-             
-              setTitle(e.target.value);
-            }}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Title.."
             required
             className="note-add__input"
+            style={{
+              background: color, // Apply the selected color to the border
+            }}
           />
         </div>
-        <div className="note-add__color-picker">
-          <input
-            className="note-add__color-picker-input"
-            title="Pick a color"
-            type="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-          />
+
+        {/* Color Options */}
+        <div className="note-add__color-options">
+          <div className="note-add__color-options-container">
+            {[
+              "#ffe5e5", // Soft pink
+              "#fff5e6", // Soft peach
+              "#e6ffe6", // Soft green
+              "#f5f5f5", // Very light gray
+              "#e6f7ff", // Soft blue
+              "#f9e6ff", // Soft lavender
+            ].map((colorOption) => {
+              return (
+                <div
+                  key={colorOption}
+                  className={`note-add__color-option ${
+                    color === colorOption
+                      ? "note-add__color-option--selected"
+                      : ""
+                  }`}
+                  style={{ backgroundColor: colorOption }}
+                  onClick={() => setColor(colorOption)}
+                  title={`Color ${colorOption}`}
+                ></div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
       {/* Quill Editor */}
       <div className="note-add__content-field">
-        <div ref={editorRef} className="note-add__quill-editor" />
+        <div
+          ref={editorRef}
+          className="note-add__quill-editor"
+          style={{
+            background: color, // Apply the selected color to the editor border
+          }}
+        />
       </div>
 
-       {/* Tags Field */}
-       <div className="note-add__tags">
+      {/* Tags Field */}
+      <div className="note-add__tags">
         <input
           type="text"
           value={tags}
           placeholder="Tags: comma-separated.."
-          onChange={(e) => {
-            setTags(e.target.value);
-          }}
+          onChange={(e) => setTags(e.target.value)}
           required
           className="note-add__tags-input"
+          style={{
+            background: color, // Apply the selected color to the border
+          }}
         />
       </div>
 
       {/* AI Tools */}
       <div className="note-add__ai-tools">
-        
         <button
           onClick={() => handleAIProcess("grammar_correction")}
           disabled={aiLoading || !content}
@@ -252,8 +276,6 @@ export default function NoteAddForm() {
         )}
       </div>
 
-     
-
       {/* Actions */}
       <div className="note-add__actions">
         <button
@@ -265,7 +287,6 @@ export default function NoteAddForm() {
         </button>
         <button
           onClick={() => {
-            
             navigate("/notes");
           }}
           disabled={loading}
