@@ -6,11 +6,8 @@ import "./DocumentEdit.scss";
 
 import back from "../../assets/icons/back3.png";
 
-export default function DocumentEdit({
-  onCancelEditDocument,
-  onSaveEditDocument,
-}) {
-  const { id } = useParams(); // Extract the document ID from the URL
+export default function DocumentEdit() {
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   const [filename, setFilename] = useState("");
@@ -48,26 +45,13 @@ export default function DocumentEdit({
 
       // Split and trim tags
       const updatedTags = tags.split(",").map((tag) => tag.trim());
-      console.log("Payload being sent to server:", {
-        filename: filename.trim(),
-        tags: updatedTags, // Use updatedTags here
-      });
-
-      console.log("Payload being sent to the server:", {
-        filename: filename.trim(),
-        tags: tags.trim(),
-      });
 
       const response = await axios.patch(`${API_URL}/api/documents/${id}`, {
         filename: filename.trim(),
         tags: updatedTags,
       });
 
-      console.log("Response from Server:", response.data);
-
-      alert("Documents updated successfully!");
-
-      navigate("/documents"); // Navigate back to documents page
+      navigate("/documents");
     } catch (err) {
       console.error("Error updating document:", err);
       if (err.response) {

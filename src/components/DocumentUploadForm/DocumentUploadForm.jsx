@@ -13,7 +13,7 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [showForm, setShowForm] = useState(false); // State to toggle form visibility
+  const [showForm, setShowForm] = useState(false);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -78,9 +78,9 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
 
   return (
     <div className="document-upload-form">
-      
       {!showForm && (
         <img
+          title="Upload a file"
           src={upload}
           onClick={() => setShowForm(true)}
           className="document-upload-form__upload-icon"
@@ -88,12 +88,11 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
         />
       )}
 
-
       {showForm && (
         <div className="document-upload-form__modal-overlay">
           <div className="document-upload-form__modal-content">
-      
             <img
+              title="Go back"
               src={goBack}
               alt="Go Back"
               onClick={() => setShowForm(false)}
@@ -104,8 +103,10 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
               className="document-upload-form__form"
             >
               <div className="document-upload-form__form-group">
-        
-                <label className="document-upload-form__file-label" htmlFor="uploadFile">
+                <label
+                  className="document-upload-form__file-label"
+                  htmlFor="uploadFile"
+                >
                   Choose File
                 </label>
                 <input
@@ -114,8 +115,10 @@ export default function DocumentUploadForm({ onUploadSuccess }) {
                   className="document-upload-form__file-input"
                   onChange={handleFileChange}
                 />
-             
-                {file && <p className="document-upload-form__file-name">{filename}</p>}
+
+                {file && (
+                  <p className="document-upload-form__file-name">{filename}</p>
+                )}
               </div>
 
               <div className="document-upload-form__form-group">

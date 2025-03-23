@@ -14,7 +14,6 @@ import LinkDetails from "./components/LinkDetails/LinkDetails";
 import LinkEdit from "./components/LinkEdit/LinkEdit";
 import DocumentsPage from "./pages/DocumentsPage/DocumentsPage";
 import DocumentEdit from "./components/DocumentEdit/DocumentEdit";
-import DocumentDetails from "./components/DocumentDetails/DocumentDetails";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 
@@ -34,7 +33,6 @@ function App() {
         <Route path="/links/:id" element={<LinkDetails />} />
         <Route path="/links/:id/edit" element={<LinkEdit />} />
         <Route path="/documents" element={<DocumentsPage />} />
-        <Route path="/documents/:id" element={<DocumentDetails />} />
         <Route path="/documents/:id/edit" element={<DocumentEdit />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

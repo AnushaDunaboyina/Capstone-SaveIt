@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./EventForm.scss";
 import { v4 as uuidv4 } from "uuid";
 import EmojiPicker from "emoji-picker-react";
+// import "./EmojiPicker.scss";
 
 export default function EventForm({ event, slot, onSave, onDelete, onClose }) {
   const [title, setTitle] = useState(event?.title || "");
@@ -60,32 +61,46 @@ export default function EventForm({ event, slot, onSave, onDelete, onClose }) {
     setReminder(5);
     setIsCompleted(false);
     setNotes("");
-    setStart(new Date()); // Reset to current time
-    setEnd(new Date()); // Reset to current time
+    setStart(new Date());
+    setEnd(new Date());
   };
 
   return (
     <div className="event-form-overlay">
       <div className="event-form">
-        <h3>{event ? "Edit Event" : "Add Event"}</h3>
+        <h3 className="event-form__title">
+          {event ? "Edit Event" : "Add Event"}
+        </h3>
 
         {/* Event Title Input */}
         <input
+          className="event-form__input event-form__title-input"
           type="text"
-          placeholder="Event Title"
+          placeholder="Add an event here..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         {/* Event Type Dropdown */}
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="Event">Event</option>
-          <option value="To-Do">To-Do</option>
-          <option value="Memory">Memory</option>
+        <select
+          className="event-form__input event-form__type-select"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option className="event-form__option" value="Event">
+            Event
+          </option>
+          <option className="event-form__option" value="To-Do">
+            To-Do
+          </option>
+          <option className="event-form__option" value="Memory">
+            Memory
+          </option>
         </select>
 
         {/* Color Picker */}
         <input
+          className="event-form__input event-form__color-picker"
           type="color"
           value={color}
           onChange={(e) => setColor(e.target.value)}
@@ -93,8 +108,9 @@ export default function EventForm({ event, slot, onSave, onDelete, onClose }) {
 
         {/* To-Do: Mark as Completed */}
         {type === "To-Do" && (
-          <label>
+          <label className="event-form__label event-form__completed-label">
             <input
+              className="event-form__checkbox"
               type="checkbox"
               checked={isCompleted}
               onChange={(e) => setIsCompleted(e.target.checked)}
@@ -106,6 +122,7 @@ export default function EventForm({ event, slot, onSave, onDelete, onClose }) {
         {/* Memory: Notes Input */}
         {type === "Memory" && (
           <textarea
+            className="event-form__input event-form__notes-input"
             placeholder="Add a memory (e.g., 'Had a wonderful day! 😊')"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -115,75 +132,50 @@ export default function EventForm({ event, slot, onSave, onDelete, onClose }) {
         {/* Emoji Picker Toggle */}
         <button
           type="button"
-          className="emoji-toggle-button"
+          className="event-form__button event-form__emoji-toggle-button"
           onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}
         >
-          {emojiPickerVisible ? "Close Emoji Picker" : "😊"}
+          {emojiPickerVisible ? "Close Emoji Picker" : "Emojis 😊"}
         </button>
 
         {/* Emoji Picker */}
         {emojiPickerVisible && (
-          <div className="emoji-picker-container">
+          <div className="event-form__emoji-picker-container">
             <EmojiPicker
               onEmojiClick={(emojiObject) => {
-                setTitle(title + emojiObject.emoji); // Append emoji to title
-                setEmojiPickerVisible(false); // Close picker after selection
+                setTitle(title + emojiObject.emoji);
               }}
             />
           </div>
         )}
 
-        {/* Start Time
-        <label>
-          Start Time:
-          <input
-            type="datetime-local"
-            value={start.toISOString().slice(0, 16)}
-            onChange={(e) => setStart(new Date(e.target.value))}
-          />
-        </label>
-
-        {/* End Time */}
-        {/* <label>
-          End Time:
-          <input
-            type="datetime-local"
-            value={end.toISOString().slice(0, 16)}
-            onChange={(e) => setEnd(new Date(e.target.value))}
-          />
-        </label> */}
-
-        {/* Reminder */}
-        {/* <label>
-          Reminder:
-          <select
-            value={reminder}
-            onChange={(e) => setReminder(Number(e.target.value))}
+        {/* Form Actions */}
+        <div className="event-form__actions">
+          <button
+            className="event-form__button event-form__save-button"
+            onClick={handleSubmit}
           >
-            <option value={0}>No reminder</option>
-            <option value={5}>5 minutes before</option>
-            <option value={60}>1 hour before</option>
-          </select>
-        </label> */}
-
-        {/* Save and Control Buttons */}
-
-        <div>
-          <button onClick={handleSubmit}>
             {event ? "Update" : "Add"}
           </button>
-          {/* <button onClick={handleAddEvent}>Add Another Event</button> */}
+
           {event && (
             <button
+              className="event-form__button event-form__delete-button"
               onClick={() => {
-                onDelete(event.id); // Delete the event
-                onClose(); // Close the modal
+                onDelete(event.id);
+                onClose();
               }}
             >
               Delete
             </button>
           )}
-          <button onClick={onClose}>Cancel</button>
+
+          <button
+            className="event-form__button event-form__cancel-button"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

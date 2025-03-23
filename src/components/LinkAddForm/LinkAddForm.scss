@@ -127,7 +127,7 @@
       color: $white;
 
       &:hover {
-        background-color: #4a9fff;
+        background-color: $blue-hover;
       }
 
       &:disabled {
@@ -142,7 +142,7 @@
       color: $white;
 
       &:hover {
-        background-color: #ff4c4c;
+        background-color: $red-hover;
       }
 
       &:disabled {

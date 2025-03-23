@@ -2,13 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../config";
 import DocumentUploadForm from "../DocumentUploadForm/DocumentUploadForm";
-import SearchBar from "../SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import "./DocumentsList.scss";
 
 import sort from "../../assets/icons/sort.png";
-import addDocument from "../../assets/icons/add-file.png";
 import editDocument from "../../assets/icons/edit1.png";
 import deleteDocument from "../../assets/icons/delete.png";
 
@@ -38,7 +36,7 @@ export default function DocumentList() {
   };
 
   useEffect(() => {
-    fetchDocuments(); // Call `fetchDocuments` within the `useEffect`
+    fetchDocuments(); 
   }, []);
 
   const handleEditDocument = (document) => {
@@ -87,7 +85,7 @@ export default function DocumentList() {
     } else if (sortBy === "createdAt") {
       const dateA = new Date(a.createdAt);
       const dateB = new Date(b.createdAt);
-      comparison = dateB - dateA; // Descending by default (latest dates first)
+      comparison = dateB - dateA; 
     }
 
     return sortOrder === "asc" ? -comparison : comparison;
@@ -95,7 +93,7 @@ export default function DocumentList() {
 
   const displayDocuments = viewAll
     ? sortedDocuments
-    : sortedDocuments.slice(0, 3); // Show the first 3 documents if "View All" is not selected
+    : sortedDocuments.slice(0, 3); 
 
   return (
     <div className="documents-list">
@@ -198,7 +196,7 @@ export default function DocumentList() {
                 <div className="documents-list__actions">
                   <a
                     className="documents-list__file-preview"
-                    href={`http://localhost:5050${document.filepath}`}
+                    href={`${API_URL}${document.filepath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

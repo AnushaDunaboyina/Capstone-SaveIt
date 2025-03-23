@@ -72,13 +72,13 @@ export default function CalendarPage() {
   };
 
   const handleSelectSlot = (slotInfo) => {
-    setSelectedEvent(null); // Clear any selected event
-    setSelectedSlot(slotInfo); // Open form for adding a new event
+    setSelectedEvent(null); 
+    setSelectedSlot(slotInfo); 
     setShowForm(true);
   };
 
   const handleSelectEvent = (event) => {
-    setSelectedEvent(event); // Open form for editing the selected event
+    setSelectedEvent(event); 
     setSelectedSlot(null);
     setShowForm(true);
   };
@@ -96,7 +96,7 @@ export default function CalendarPage() {
             headers: { "Content-Type": "application/json" },
           }
         );
-        fetchEvents(); // Refresh events
+        fetchEvents(); 
       } catch (error) {
         console.error("Failed to update event:", error.message);
       }
@@ -126,8 +126,8 @@ export default function CalendarPage() {
               event.type === "To-Do" && event.isCompleted
                 ? "line-through"
                 : "none",
-            whiteSpace: "normal", // Ensures text wraps properly
-            height: "auto", // Adjusts height dynamically
+            whiteSpace: "normal", 
+            height: "auto",
           },
         })}
       />

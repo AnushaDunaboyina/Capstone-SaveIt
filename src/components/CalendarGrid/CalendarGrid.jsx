@@ -35,9 +35,6 @@ export default function CalendarGrid({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      {
-                        console.log("Editing event:", event);
-                      }
                       onEditEvent(day.date, event);
                     }}
                   >

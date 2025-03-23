@@ -106,14 +106,14 @@
       padding: 0.625rem;
       border: none;
       border-radius: 0.5rem;
-      background-color: #6ab7ff;
+      background-color: $blue-focus;
       color: $white;
       font-size: 0.875rem;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
 
       &:hover {
-        background-color: #4a9fff;
+        background-color: $blue-hover;
         transform: translateY(-2px);
       }
 
@@ -184,7 +184,7 @@
       color: $white;
 
       &:hover {
-        background-color: #4a9fff;
+        background-color: $blue-hover;
       }
 
       &:disabled {
@@ -199,7 +199,7 @@
       color: $white;
 
       &:hover {
-        background-color: #ff4c4c;
+        background-color: $red-hover;
       }
 
       &:disabled {

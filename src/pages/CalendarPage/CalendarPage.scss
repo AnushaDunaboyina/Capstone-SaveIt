@@ -1,3 +1,5 @@
+@use "../../styles/partials/variables" as *;
+
 .calendar-page {
   margin: 2rem;
   margin-bottom: 8rem;
@@ -23,14 +25,14 @@
 }
 
 .calendar-cell {
-  border: 1px solid #ccc;
+  border: 0.063rem solid #ccc;
   padding: 1rem;
-  background-color: #f9f9f9;
+  background-color: $ghost-white;
   position: relative;
   min-height: auto;
   cursor: text;
   height: auto; 
-  overflow: visible; /* Enable vertical scrolling */
+  overflow: visible; 
 }
 
 .calendar-cell .date-label {
@@ -42,29 +44,29 @@
 }
 
 .calendar-cell:focus {
-  outline: 2px solid #007bff;
+  outline: 0.125rem solid $blue-outline;
 }
 
 .calendar-cell.empty {
-  background-color: #eaeaea;
+  background-color: $ghost-white;
   pointer-events: none;
 }
 
 .rbc-event {
-  margin-top: -2px; /* Moves the event slightly upwards */
-  line-height: 1.5; /* Ensures text fits nicely */
-  padding: 3px; /* Adds spacing for better readability */
+  margin-top: -0.125rem; 
+  line-height: 1.5; 
+  padding: 0.188rem; 
 }
 
 .rbc-event-content {
-  font-size: 13px;
+  font-size: 0.813rem;
   white-space: normal !important; 
-  word-break: break-word; /* Breaks long words if needed */
-  overflow: visible; /* Ensures the full content is displayed */
+  word-break: break-word; 
+  overflow: visible; 
 }
 
 .rbc-agenda-view .rbc-event-cell {
-  color: white; /* Change text color to white */
+  color: $white; 
 }
 
 
