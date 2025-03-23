@@ -2,10 +2,10 @@
 @use "../../styles/partials/mixins" as *;
 
 .header {
-    background-color: rgb(203, 203, 255);
-    background: linear-gradient(to right, rgb(203, 203, 255), rgb(150, 150, 255));
-    padding: 22px;
-    
+  background-color: rgb(203, 203, 255);
+  background: linear-gradient(to right, rgb(203, 203, 255), rgb(150, 150, 255));
+  padding: 26px 0;
+
   &__list {
     list-style: none;
     display: flex;
@@ -28,9 +28,23 @@
     text-transform: uppercase;
     font-weight: 700;
     color: black;
-    background-color: rgb(251, 252, 231);
+    background-color: $white;
     padding: 6px 10px;
     border-radius: 12px;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $white;
+
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus {
+      outline: 2px solid $white;
+      outline-offset: 2px;
+    }
   }
 
   &__logo {
@@ -43,5 +57,17 @@
     max-width: 52px;
     display: flex;
     align-items: center;
+
+    transition: transform 0.3s ease; 
+
+    &:hover {
+      transform: scale(1.1); 
+      filter: brightness(1.2); 
+    }
+
+    &:focus {
+      outline: 2px solid rgb(150, 150, 255); 
+      outline-offset: 2px;
+    }
   }
 }
