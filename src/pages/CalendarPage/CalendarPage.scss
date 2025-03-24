@@ -1,0 +1,73 @@
+@use "../../styles/partials/variables" as *;
+
+.calendar-page {
+  margin: 2rem;
+  margin-bottom: 8rem;
+  padding: 1rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-header select,
+.calendar-header input {
+  margin: 0 0.5rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 0.5rem;
+}
+
+.calendar-cell {
+  border: 0.063rem solid #ccc;
+  padding: 1rem;
+  background-color: $ghost-white;
+  position: relative;
+  min-height: auto;
+  cursor: text;
+  height: auto; 
+  overflow: visible; 
+}
+
+.calendar-cell .date-label {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.calendar-cell:focus {
+  outline: 0.125rem solid $blue-outline;
+}
+
+.calendar-cell.empty {
+  background-color: $ghost-white;
+  pointer-events: none;
+}
+
+.rbc-event {
+  margin-top: -0.125rem; 
+  line-height: 1.5; 
+  padding: 0.188rem; 
+}
+
+.rbc-event-content {
+  font-size: 0.813rem;
+  white-space: normal !important; 
+  word-break: break-word; 
+  overflow: visible; 
+}
+
+.rbc-agenda-view .rbc-event-cell {
+  color: $white; 
+}
+
+
+

@@ -1,0 +1,96 @@
+@use "../../styles/partials/variables" as *;
+
+.homepage {
+  &__hero {
+    height: 32rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+
+    &-heading {
+      font-size: 3.375rem;
+      font-weight: 700;
+      color: $graphite;
+    }
+
+    &-description {
+      font-size: 21px;
+      color: $gray-light;
+      max-width: 50rem;
+    }
+  }
+
+  &__features {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__feature--notes,
+  &__feature--documents {
+    background-color: rgb(252, 238, 229);
+  }
+
+  &__feature--links {
+    background-color: aliceblue;
+  }
+
+  &__feature {
+    padding: 4.5rem 6.375rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &-image {
+      width: 50%;
+      object-fit: contain;
+    }
+
+    &-content {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    &-heading {
+      font-size: 1.75rem;
+      color: $gray;
+      font-weight: 600;
+    }
+
+    &-description {
+      font-size: 18px;
+      color: $gray-light;
+      line-height: 1.6;
+    }
+
+    &-button {
+      padding: 0.625rem 1.25rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: $white;
+      background-color: $red-light;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      width: fit-content;
+      text-align: center;
+
+      &:hover {
+        background-color: #fc5858;
+        transform: translateY(-0.125rem);
+      }
+
+      &:focus {
+        outline: 0.125rem solid #fc5858;
+        outline-offset: 0.125rem;
+      }
+    }
+  }
+}

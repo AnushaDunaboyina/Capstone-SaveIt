@@ -1,0 +1,46 @@
+@use "../../styles/partials/variables" as *;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: $white;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  width: 18.75rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.9375rem;
+}
+
+.confirm-button {
+  background: $red-light;
+  color: $white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: $cloud;
+  color: $white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}

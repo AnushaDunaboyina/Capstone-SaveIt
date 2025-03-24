@@ -1,0 +1,234 @@
+@use "../../styles/partials/variables" as *;
+
+.note-edit {
+  margin: 4rem 10rem;
+  padding: 1.25rem;
+  background-color: $ghost-white;
+  border-radius: 0.938rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+
+  &__back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    cursor: pointer;
+
+    &-icon {
+      width: 1.875rem;
+      height: 1.875rem;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: -0.031rem;
+  }
+
+  &__error-message {
+    color: $red-light;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-bottom: 0.938rem;
+  }
+
+  &__title-color-field {
+    display: flex;
+    align-items: center;
+    gap: 0.938rem;
+    margin-bottom: 1.25rem;
+  }
+
+  &__title-field {
+    flex: 1;
+
+    input {
+      width: 100%;
+      padding: 0.625rem;
+      border: 0.125rem solid #ddd;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      outline: none;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+
+      &:focus {
+        border-color: $blue-focus;
+      }
+    }
+  }
+
+  &__color-options {
+    &-title {
+      font-size: 1rem;
+      color: $gray-light;
+      margin-bottom: 0.625rem;
+    }
+  }
+
+  &__content-field {
+    margin-bottom: 1.25rem;
+
+    .note-edit__quill-editor {
+      background-color: $white;
+      border: 0.125rem solid #ddd;
+      border-radius: 0.5rem;
+      min-height: 12.5rem;
+      padding: 0.625rem;
+      font-size: 1rem;
+      color: $gray;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+
+      .ql-toolbar {
+        border-radius: 0.5rem 0.5rem 0 0;
+        background-color: #f1f1f1;
+      }
+
+      .ql-container {
+        border-radius: 0 0 0.5rem 0.5rem;
+      }
+    }
+  }
+
+  &__ai-tools {
+    display: flex;
+    gap: 0.625rem;
+    margin-bottom: 1.25rem;
+
+    .note-edit__ai-button {
+      padding: 0.625rem;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: $blue-focus;
+      color: $white;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        background-color: $blue-hover;
+        transform: translateY(-0.125rem);
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+
+  &__suggestions {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+
+    .note-edit__suggestion-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__tags {
+    margin-bottom: 1.25rem;
+
+    input {
+      width: 100%;
+      padding: 0.625rem;
+      border: 0.125rem solid #ddd;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      outline: none;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+
+      &:focus {
+        border-color: $blue-focus;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: flex-end;
+
+    button {
+      padding: 0.625rem 1.25rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-0.125rem);
+      }
+    }
+
+    .note-edit__save-button {
+      background-color: $blue-focus;
+      color: $white;
+
+      &:hover {
+        background-color: $blue-hover;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    .note-edit__cancel-button {
+      background-color: $red-light;
+      color: $white;
+
+      &:hover {
+        background-color: $red-hover;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+  }
+}
+
+.note-edit__color-options-container {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.note-edit__color-option {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0.125rem solid transparent;
+  transition: transform 0.2s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: #ddd;
+  }
+}
+.note-edit__color-options--selected {
+  border-color: $gray;
+  transform: scale(1.2);
+}

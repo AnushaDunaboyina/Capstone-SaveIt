@@ -4,7 +4,7 @@ SaveIt
 
 ## Overview
 
-SaveIt is a app designed to help users organize their digital life managing notes, saving important links, and storing documents (PDFs, Word files) in one centralized platform.
+SaveIt is a app designed to help users organize their digital life by managing notes, saving important links, and storing documents (PDFs, Word files) in one centralized platform.
 
 ### Problem Space
 
@@ -22,7 +22,7 @@ In today’s digital age, people juggle multiple types of information: notes, li
   - Looking for a way to store and organize resumes, cover letters, and portfolio links.
   - Want to keep track of job application materials and related resources.
 - Casual Users:
-  - Looking for a simple way to save notoes, links and files for personal use.
+  - Looking for a simple way to save notes, links and files for personal use.
   - Want to keep their digital life organized without complexity.
 
 ### Features
@@ -38,7 +38,6 @@ features are implemented, only _what_ needs to be implemented. -->
 - As a user, I want to be able to preview or download documents so that I can view or use them as needed.
 - As a user, I want to be able to store and organize resumes, cover letters, and portfolio links so that I can manage my job application materials efficiently.
 - As a user, I want to be able to tag documents with job titles or companies so that I can easily find materials for specific applications.
-- As a user, I want to be able to use a simple login system (optional) so that I can personalize my experience.
 
 ## Implementation
 
@@ -68,13 +67,12 @@ features are implemented, only _what_ needs to be implemented. -->
 
 ### APIs
 
-- Link Preview API
-- File Upload API
+- Gemini AI API
 
 ### Sitemap
 
 - Home Page:
-  - Header with logo, navigation, and search bar.
+  - Header with logo, navigation, and calendar.
   - Hero section with a headline, subheadline, and call-to-action buttons.
   - Recent activity:
     - Notes: Top 3 recent notes with a "Create Note" button
@@ -91,8 +89,7 @@ features are implemented, only _what_ needs to be implemented. -->
   - Header with back and upload document buttons.
   - File upload form and list of uploaded documents.
   - Preview and delete buttons
-- Login Page (Optional):
-  - Simple login form for personalization.
+
 
 ### Mockups
 
@@ -432,6 +429,4 @@ Response:
 - Collaboration Features
   - Allow users to share notes, links, and documents with others.
   - Add permissions for viewing or editing shared content.
-- AI-Powered Features
-  - Automatically summarize notes using AI.
-  - Suggest tags based on note content.
+
