@@ -45,7 +45,7 @@ export default function Footer() {
           </a>
           <a
             className="footer__social-link"
-            href="https://facebook.com/your-profile"
+            href="https://www.facebook.com/anusha.dunaboyina.5"
             target="_blank"
           >
             <img
@@ -56,7 +56,7 @@ export default function Footer() {
           </a>
           <a
             className="footer__social-link"
-            href="https://instagram.com/your-profile"
+            href="https://www.instagram.com/anushadunaboyina/"
             target="_blank"
           >
             <img
@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__contact">
-          <p className="footer__contact-info">anusha.dunaboyina@gmail.com</p>
+          <p className="footer__contact-info">Contact: anusha.dunaboyina@gmail.com</p>
         </div>
       </div>
     </footer>
