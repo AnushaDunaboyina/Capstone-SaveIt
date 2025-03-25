@@ -1,7 +1,10 @@
 @use "../../styles/partials/variables" as *;
 
 .links-page {
-  padding: 2rem 6.25rem;
+  padding: 2rem 7.25rem;
+  max-width: 1480px;
+  margin: 0 auto;
+
 
   &__header-container {
     padding: 0 2rem;

@@ -129,6 +129,8 @@ export default function NotesPage() {
             </div>
           </div>
 
+          <div className="notes-page__divider"></div>
+
           <div className="notes-page__view-all">
             {!viewAll ? (
               <button
