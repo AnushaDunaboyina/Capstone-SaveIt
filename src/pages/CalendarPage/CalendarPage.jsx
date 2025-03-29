@@ -111,7 +111,7 @@ export default function CalendarPage() {
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 700 }}
+        style={{ height: 600, width: 1000,}}
         selectable
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}

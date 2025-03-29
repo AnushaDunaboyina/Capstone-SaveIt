@@ -1,9 +1,10 @@
 @use "../../styles/partials/variables" as *;
 
 .notes-page {
-  padding: 2rem 6.25rem;
-
-
+  padding: 2rem 7.25rem;
+  max-width: 1480px;
+  margin: 0 auto;
+ 
   &__header-container{
     padding: 0 2rem;
     background-color: rgb(253, 253, 235);
@@ -94,6 +95,13 @@
       transform: scale(1.1);
     }
   }
+
+  &__divider {
+    height: 0.063rem;
+    background-color: $cloud;
+    margin: 0.125rem 0;
+  }
+
 
   &__view-all {
     display: flex;
