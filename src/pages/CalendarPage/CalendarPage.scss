@@ -1,9 +1,10 @@
 @use "../../styles/partials/variables" as *;
 
 .calendar-page {
-  margin: 2rem;
+  margin: 2rem auto;
   margin-bottom: 8rem;
   padding: 1rem;
+  
 }
 
 .calendar-header {

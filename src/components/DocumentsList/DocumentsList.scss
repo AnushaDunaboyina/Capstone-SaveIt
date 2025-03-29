@@ -111,16 +111,16 @@
     margin: 2.25rem 3.25rem;    
   }
 
-  &__items {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+  // &__items {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   flex-wrap: wrap;
+  //   gap: 1rem;
+  // }
 
   &__item {
-    width: 27.5rem;
+    // width: 27.5rem;
     background-color: $white;
     border: 0.063rem solid #ddd;
     border-radius: 0.625rem;
